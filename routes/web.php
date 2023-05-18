@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// ログイン中のユーザはホーム画面へ
 Route::group(['middleware' => ['guest']], function(){
     Route::namespace('Auth')->group(function(){
         Route::get('/register', 'RegisterController@registerView')->name('registerView');
@@ -19,7 +19,7 @@ Route::group(['middleware' => ['guest']], function(){
         Route::post('/login/post', 'LoginController@loginPost')->name('loginPost');
     });
 });
-
+// ログインユーザのみアクセス可能なページ
 Route::group(['middleware' => 'auth'], function(){
     Route::namespace('Authenticated')->group(function(){
         Route::namespace('Top')->group(function(){

@@ -98,4 +98,19 @@ $(function () {
     }
   });
 
+  // 年のプルダウンを作りたい
+
+  $('old_year').click(function(){
+
+    // 空のセレクトボックス要素を取得
+    var selectBox = document.getElementByID('old_year');
+    // 今年を取得
+    var this_year =today.getFullYear();
+    // 2000年から今日までを繰り返す
+    for (var i = 2000; i <= '$this_year'; i++) {
+        var option = '<option value="' + i + '">' + i + '歳</option>';
+        selectBox.insertAdjacentHTML('beforeend', option);
+    }
+    });
+
 })

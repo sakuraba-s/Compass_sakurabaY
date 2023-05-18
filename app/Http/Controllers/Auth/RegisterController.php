@@ -57,6 +57,23 @@ class RegisterController extends Controller
         return view('auth.register.register', compact('subjects'));
     }
 
+    // 新規登録バリデーション
+    public function validator(array $data){
+        $validator=Validator::make($data,[
+        'over_name' => 'required|string|max:10',
+        'under_name' => 'required|string|max:10',
+        'over_name_kana' => 'required|string|max:30|/\A[ァ-ヴー]+\z/u',
+        'under_name_kana' => 'required|string|max:30|/\A[ァ-ヴー]+\z/u',
+        'mail_address' => ['required','string','email:filter,dns','max:100',Rule::unique('users')->ignore(Auth::id())],
+        'sex' => 'required',
+        'old_year' => 'required',
+        'role' => 'required',
+        'password' => 'required|string|min:8|max:30|confirmed',
+        ]);
+        return $validator;
+    }
+
+    // ユーザ新規登録
     public function registerPost(Request $request)
     {
         DB::beginTransaction();
@@ -68,24 +85,34 @@ class RegisterController extends Controller
             $birth_day = date('Y-m-d', strtotime($data));
             $subjects = $request->subject;
 
-            $user_get = User::create([
-                'over_name' => $request->over_name,
-                'under_name' => $request->under_name,
-                'over_name_kana' => $request->over_name_kana,
-                'under_name_kana' => $request->under_name_kana,
-                'mail_address' => $request->mail_address,
-                'sex' => $request->sex,
-                'birth_day' => $birth_day,
-                'role' => $request->role,
-                'password' => bcrypt($request->password)
-            ]);
-            $user = User::findOrFail($user_get->id);
-            $user->subjects()->attach($subjects);
-            DB::commit();
-            return view('auth.login.login');
-        }catch(\Exception $e){
-            DB::rollback();
-            return redirect()->route('loginView');
-        }
+            // バリデーション
+            $validator=$this->validator($data);
+            // バリデーション失敗
+                if ($validator->fails()){
+                    return redirect()->route('loginView')
+                    ->withErrors($validator)
+                    // セッションにエラー情報を入れる
+                    ->withInput();
+                }
+
+                    $user_get = User::create([
+                        'over_name' => $request->over_name,
+                        'under_name' => $request->under_name,
+                        'over_name_kana' => $request->over_name_kana,
+                        'under_name_kana' => $request->under_name_kana,
+                        'mail_address' => $request->mail_address,
+                        'sex' => $request->sex,
+                        'birth_day' => $birth_day,
+                        'role' => $request->role,
+                        'password' => bcrypt($request->password)
+                    ]);
+                    $user = User::findOrFail($user_get->id);
+                    $user->subjects()->attach($subjects);
+                    DB::commit();
+                    return view('auth.login.login');
+            }catch(\Exception $e){
+                DB::rollback();
+                return redirect()->route('loginView');
+            }
     }
 }

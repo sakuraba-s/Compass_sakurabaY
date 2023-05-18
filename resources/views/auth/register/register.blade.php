@@ -62,8 +62,14 @@
         </div>
         <div class="mt-3">
           <label class="d-block m-0 aa" style="font-size:13px">生年月日</label>
-          <select class="old_year" name="old_year">
-            <option value="none">-----</option>
+          <select id="old_year" name="old_year">
+            <option value="" selected>-----</option>
+            <option value="">-----</option>
+            <option value="">-----</option>
+            <option value="">-----</option>
+            <option value="">-----</option>
+            <option value="">-----</option>
+            <!-- <option value="none">-----</option>
             <option value="1985">1985</option>
             <option value="1986">1986</option>
             <option value="1987">1987</option>
@@ -89,7 +95,7 @@
             <option value="2007">2007</option>
             <option value="2008">2008</option>
             <option value="2009">2009</option>
-            <option value="2010">2010</option>
+            <option value="2010">2010</option> -->
           </select>
           <label style="font-size:13px">年</label>
           <select class="old_month" name="old_month">
