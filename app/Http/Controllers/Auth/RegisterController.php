@@ -8,7 +8,9 @@ use App\Models\Users\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+// フォームリクエストの読み込み
 use Illuminate\Http\Request;
+use App\Http\Requests\TestPostRequest;
 use DB;
 
 use App\Models\Users\Subjects;
@@ -57,27 +59,13 @@ class RegisterController extends Controller
         return view('auth.register.register', compact('subjects'));
     }
 
-    // 新規登録バリデーション
-    public function validator(array $data){
-        $validator=Validator::make($data,[
-        'over_name' => 'required|string|max:10',
-        'under_name' => 'required|string|max:10',
-        'over_name_kana' => 'required|string|max:30|/\A[ァ-ヴー]+\z/u',
-        'under_name_kana' => 'required|string|max:30|/\A[ァ-ヴー]+\z/u',
-        'mail_address' => ['required','string','email:filter,dns','max:100',Rule::unique('users')->ignore(Auth::id())],
-        'sex' => 'required',
-        'old_year' => 'required',
-        'role' => 'required',
-        'password' => 'required|string|min:8|max:30|confirmed',
-        ]);
-        return $validator;
-    }
-
     // ユーザ新規登録
-    public function registerPost(Request $request)
+    // バリデーションをかませる
+    public function registerPost(TestPostRequest $request)
     {
         DB::beginTransaction();
         try{
+            // データの取得
             $old_year = $request->old_year;
             $old_month = $request->old_month;
             $old_day = $request->old_day;
@@ -85,31 +73,25 @@ class RegisterController extends Controller
             $birth_day = date('Y-m-d', strtotime($data));
             $subjects = $request->subject;
 
-            // バリデーション
-            $validator=$this->validator($data);
-            // バリデーション失敗
-                if ($validator->fails()){
-                    return redirect()->route('loginView')
-                    ->withErrors($validator)
-                    // セッションにエラー情報を入れる
-                    ->withInput();
-                }
 
-                    $user_get = User::create([
-                        'over_name' => $request->over_name,
-                        'under_name' => $request->under_name,
-                        'over_name_kana' => $request->over_name_kana,
-                        'under_name_kana' => $request->under_name_kana,
-                        'mail_address' => $request->mail_address,
-                        'sex' => $request->sex,
-                        'birth_day' => $birth_day,
-                        'role' => $request->role,
-                        'password' => bcrypt($request->password)
-                    ]);
-                    $user = User::findOrFail($user_get->id);
-                    $user->subjects()->attach($subjects);
-                    DB::commit();
-                    return view('auth.login.login');
+            // 登録
+                $user_get = User::create([
+                    'over_name' => $request->over_name,
+                    'under_name' => $request->under_name,
+                    'over_name_kana' => $request->over_name_kana,
+                    'under_name_kana' => $request->under_name_kana,
+                    'mail_address' => $request->mail_address,
+                    'sex' => $request->sex,
+                    'birth_day' => $birth_day,
+                    'role' => $request->role,
+                    'password' => bcrypt($request->password)
+                ]);
+                // 上記で新規登録したidを取得
+                $user = User::findOrFail($user_get->id);
+                // ユーザ情報と科目の紐づけ
+                $user->subjects()->attach($subjects);
+                DB::commit();
+                return view('auth.login.login');
             }catch(\Exception $e){
                 DB::rollback();
                 return redirect()->route('loginView');

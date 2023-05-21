@@ -53,7 +53,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+// リレーション
     public function posts(){
         return $this->hasMany('App\Models\Posts\Post');
     }
@@ -61,13 +61,13 @@ class User extends Authenticatable
     public function calendars(){
         return $this->belongsToMany('App\Models\Calendars\Calendar', 'calendar_users', 'user_id', 'calendar_id')->withPivot('user_id', 'id');
     }
-
+// スクール予約＿ユーザ
     public function reserveSettings(){
         return $this->belongsToMany('App\Models\Calendars\ReserveSettings', 'reserve_setting_users', 'user_id', 'reserve_setting_id')->withPivot('id');
     }
-
+// 教科＿ユーザ
     public function subjects(){
-        return ;// リレーションの定義
+        return $this->belongsToMany('App\Models\Users\Subjects', 'subject_users', 'user_id', 'subjects_id')->withPivot('id');
     }
 
     // いいねしているかどうか
