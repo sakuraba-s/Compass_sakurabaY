@@ -8,10 +8,12 @@ use App\Models\Users\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+// トランザクションを張る
+use Illuminate\Support\Facades\DB;
 // フォームリクエストの読み込み
 use Illuminate\Http\Request;
 use App\Http\Requests\TestPostRequest;
-use DB;
+// use DB;
 
 use App\Models\Users\Subjects;
 
@@ -90,9 +92,11 @@ class RegisterController extends Controller
                 $user = User::findOrFail($user_get->id);
                 // ユーザ情報と科目の紐づけ
                 $user->subjects()->attach($subjects);
+                // commitメソッドでデータベースに反映
                 DB::commit();
                 return view('auth.login.login');
             }catch(\Exception $e){
+                // これまでのデータベースの変更をトランザクションの開始時まで戻す
                 DB::rollback();
                 return redirect()->route('loginView');
             }

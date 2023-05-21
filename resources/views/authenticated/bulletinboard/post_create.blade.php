@@ -13,6 +13,7 @@
         @endforeach
       </select>
     </div>
+    <!-- バリデーション表示 -->
     <div class="mt-3">
       @if($errors->first('post_title'))
       <span class="error_message">{{ $errors->first('post_title') }}</span>
