@@ -27,28 +27,52 @@ class TestPostRequest extends FormRequest
     public function rules()
     {
         return [
+            // 完了
             'over_name' => 'required|string|max:10',
+            // 完了
             'under_name' => 'required|string|max:10',
-            'over_name_kana' => 'required|string|max:30',
+
+            // なぞ
+            'over_name_kana' => 'required|regex:/\A[ァ-ヴー]+\z/u|max:30',
             'under_name_kana' => 'required|regex:/\A[ァ-ヴー]+\z/u|max:30',
-            'mail_address' => 'required','string^','email:filter,dns','max:100','unique:true',
+            // 完了
+            'mail_address' => 'required|string|email:dns|max:100|unique:users',
+            // 完了
             'sex' => 'required|string|regex:/[123]/',
-            // 'old_year' => 'required|regex:([0-9]{4})-(([13578]|10|12)-([1-9]|[12][0-9]|3[01]))|(([469]|11)-([1-9]|[12][0-9]|30))|(([13578]|10|12)-([1-9]|[12][0-9]|30))|(([2]-([1-9]|[12][0-9]))|after:2000-01-01|before:today',
             'role' => 'required|string|regex:/[1234]/',
+            // 完了
             'password' => 'required|string|min:8|max:30|confirmed',
+
+            // なぞ
+            // 'old_year' => 'required|regex:/([0-9]{4})/',
+            // 'old_month' => 'required|regex:/([0-9]{1})|[11]|[12]/',
+            // 'old_day' => 'required|regex:/([0-9]{1})',
         ];
     }
 // バリデーションメッセージ
     public function messages(){
         return [
-            'over_name' => '姓は10文字以下で入力してください。',
-            'under_name' => '名は10文字以下で入力してください。',
-            'over_name_kana' => 'セイは10文字以下で入力してください。',
-            'under_name_kana' => 'メイは10文字以下で入力してください。',
-            'mail_address' => 'メールアドレスは100文字以内で入力してください。',
-            'sex' => '性別を正しく選択して下さい。',
-            'role' => '権限を正しく選択して下さいaaa。',
-            'password' => 'パスワードは8文字以上30文字以下です。',
+            'over_name.max' => '姓は10文字以下で入力してください。',
+            'under_name.max' => '名は10文字以下で入力してください。',
+            'over_name_kana.max' => 'セイは10文字以下で入力してください。',
+            'over_name_kana.regex' => 'セイはカタカナで入力してください。',
+            'under_name_kana.max' => 'メイは10文字以下で入力してください。',
+            'under_name_kana.regex' => 'メイは10文字以下で入力してください。',
+            'mail_address.email' => 'メールアドレスの形式で入力してください。',
+            'mail_address.max' => 'メールアドレスは100文字以内で入力してください。',
+            'mail_address.unique' => '登録済みのメールアドレスです。',
+            'sex.regex' => '性別を正しく選択して下さい。',
+            'role.regex' => '権限を正しく選択して下さい。',
+            'password.min' => 'パスワードは8文字以上です。',
+            'password.max' => 'パスワードは30文字以下です。',
+            'password.confirmed' => 'パスワードが一致しません。',
+
+            'old_year.regex' => '年が不正です。',
+            'old_year.min' => '2000年以降を選択してください。',
+            'old_year.max' => '2023年以前を選択してください。',
+            'old_month.regex' => '月が不正です。',
+            'old_day.regex' => '日が不正です。',
+
         ];
     }
 }

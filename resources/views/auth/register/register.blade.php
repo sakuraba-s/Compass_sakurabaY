@@ -38,10 +38,10 @@
             </div>
           </div>
           <div class="d-flex mt-3" style="justify-content:space-between">
-            @if($errors->first('post_title'))
+            @if($errors->first('over_name_kana'))
             <span class="error_message">{{ $errors->first('over_name_kana') }}</span>
             @endif
-            @if($errors->first('post_title'))
+            @if($errors->first('under_name_kana'))
             <span class="error_message">{{ $errors->first('under_name_kana') }}</span>
             @endif
             <div class="" style="width:140px">
@@ -79,6 +79,15 @@
           <label style="font-size:13px">その他</label>
         </div>
         <div class="mt-3">
+          @if($errors->first('old_year'))
+          <span class="error_message">{{ $errors->first('old_year') }}</span>
+          @endif
+          @if($errors->first('old_month'))
+          <span class="error_message">{{ $errors->first('old_month') }}</span>
+          @endif
+          @if($errors->first('old_day'))
+          <span class="error_message">{{ $errors->first('old_day') }}</span>
+          @endif
           <label class="d-block m-0 aa" style="font-size:13px">生年月日</label>
           <select class="old_year" name="old_year">
             <option value="none">-----</option>
@@ -163,7 +172,7 @@
           <label style="font-size:13px">月</label>
         </div>
         <div class="mt-3">
-          @if($errors->first('role'))
+          @if($errors->has('role'))
           <span class="error_message">{{ $errors->first('role') }}</span>
           @endif
           <label class="d-block m-0" style="font-size:13px">役職</label>

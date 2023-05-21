@@ -22,6 +22,7 @@ class User extends Authenticatable
      *
      * @var array
      */
+    // ホワイトリスト
     protected $fillable = [
         'over_name',
         'under_name',

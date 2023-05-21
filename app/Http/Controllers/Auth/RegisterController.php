@@ -75,7 +75,6 @@ class RegisterController extends Controller
             $birth_day = date('Y-m-d', strtotime($data));
             $subjects = $request->subject;
 
-
             // 登録
                 $user_get = User::create([
                     'over_name' => $request->over_name,
