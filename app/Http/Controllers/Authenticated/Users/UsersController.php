@@ -15,15 +15,27 @@ class UsersController extends Controller
 {
 
     public function showUsers(Request $request){
+        // 検索内容を取得
+        // 検索ワード
         $keyword = $request->keyword;
+        // カテゴリ
         $category = $request->category;
+        // 昇順降順
         $updown = $request->updown;
+        // 追加の条件
         $gender = $request->sex;
         $role = $request->role;
-        $subjects = null;// ここで検索時の科目を受け取る
+        $subjects = $request->subjects;
+        // $subjects = null;
+        // ここで検索時の科目を受け取る
         $userFactory = new SearchResultFactories();
+        // initializeメソッド
+        // classがnewされた際に呼び出されるメソッド
+        // SearchResultFactoriesのファイル参照
         $users = $userFactory->initializeUsers($keyword, $category, $updown, $gender, $role, $subjects);
-        $subjects = Subjects::all();
+        // モデルからすべて取得
+        // $subjects = Subjects::all();
+        // compact関数で変数をビューに受け渡す
         return view('authenticated.users.search', compact('users', 'subjects'));
     }
 

@@ -41,16 +41,20 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    // ログイン画面
     public function loginView()
     {
         return view('auth.login.login');
     }
 
+    // ログイン処理
     public function loginPost(Request $request)
     {
+        // 認証成功すればトップ画面
         $userdata = $request -> only('mail_address', 'password');
         if (Auth::attempt($userdata)) {
             return redirect('/top');
+         // 失敗すればログイン画面へ
         }else{
             return redirect('/login')->with('flash_message', 'name or password is incorrect');
         }

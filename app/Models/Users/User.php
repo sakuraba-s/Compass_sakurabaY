@@ -54,11 +54,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-// リレーション
+// 投稿とのリレーション
+// ユーザに対して投稿は複数存在する
+// このメソッドを呼び出すことでユーザ情報だけでなく東湖内容のデータも取得できる
     public function posts(){
         return $this->hasMany('App\Models\Posts\Post');
     }
-
+// 中間テーブルを介してデータを取得できる
     public function calendars(){
         return $this->belongsToMany('App\Models\Calendars\Calendar', 'calendar_users', 'user_id', 'calendar_id')->withPivot('user_id', 'id');
     }
@@ -68,7 +70,7 @@ class User extends Authenticatable
     }
 // 教科＿ユーザ
     public function subjects(){
-        return $this->belongsToMany('App\Models\Users\Subjects', 'subject_users', 'user_id', 'subjects_id')->withPivot('id');
+        return $this->belongsToMany('App\Models\Users\Subjects', 'subject_users', 'user_id', 'subject_id')->withPivot('id');
     }
 
     // いいねしているかどうか

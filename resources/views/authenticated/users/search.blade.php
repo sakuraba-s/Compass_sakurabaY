@@ -42,8 +42,17 @@
         @endif
       </div>
       <div>
+        <!-- 生徒ならば選択科目を表示 -->
         @if($user->role == 4)
-        <span>選択科目 :</span>
+          <div>
+          @if($user->subjects == 1)
+          <span>選択科目 : </span><span>国語</span>
+          @elseif($user->subjects == 2)
+          <span>選択科目  : </span><span>数学</span>
+          @elseif($user->subjects == 3)
+          <span>選択科目  : </span><span>英語</span>
+          @endif
+          </div>
         @endif
       </div>
     </div>
@@ -88,6 +97,12 @@
           </div>
           <div class="selected_engineer">
             <label>選択科目</label>
+            <select name="subjects" form="userSearchRequest" class="engineer">
+              <option selected disabled>----</option>
+              <option value="1">国語</option>
+              <option value="2">数学</option>
+              <option value="3">英語</option>
+            </select>
           </div>
         </div>
       </div>
@@ -98,6 +113,7 @@
         <input type="submit" name="search_btn" value="検索" form="userSearchRequest">
       </div>
     </div>
+    <!-- 検索内容をget送信 -->
     <form action="{{ route('user.show') }}" method="get" id="userSearchRequest"></form>
   </div>
 </div>
