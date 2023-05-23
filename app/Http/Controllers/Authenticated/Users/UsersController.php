@@ -25,17 +25,19 @@ class UsersController extends Controller
         // 追加の条件
         $gender = $request->sex;
         $role = $request->role;
+        // 選択された科目をidで受け取る
         $subjects = $request->subjects;
-        // $subjects = null;
-        // ここで検索時の科目を受け取る
+        // 検索絞り込み
         $userFactory = new SearchResultFactories();
         // initializeメソッド
         // classがnewされた際に呼び出されるメソッド
+        // 検索ワードに合致する結果を取得
         // SearchResultFactoriesのファイル参照
         $users = $userFactory->initializeUsers($keyword, $category, $updown, $gender, $role, $subjects);
-        // モデルからすべて取得
-        // $subjects = Subjects::all();
+        // モデルからすべて取得 選択科目プルダウン用
+        $subjects = Subjects::all();
         // compact関数で変数をビューに受け渡す
+        // 絞り込んだユーザ情報とプルダウン用の選択科目
         return view('authenticated.users.search', compact('users', 'subjects'));
     }
 

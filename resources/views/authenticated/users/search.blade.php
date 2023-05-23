@@ -4,6 +4,7 @@
 <p>ユーザー検索</p>
 <div class="search_content w-100 border d-flex">
   <div class="reserve_users_area">
+    <!-- コントローラから来たユーザ情報を繰り返しに入れる -->
     @foreach($users as $user)
     <div class="border one_person">
       <div>
@@ -45,13 +46,13 @@
         <!-- 生徒ならば選択科目を表示 -->
         @if($user->role == 4)
           <div>
-          @if($user->subjects == 1)
-          <span>選択科目 : </span><span>国語</span>
-          @elseif($user->subjects == 2)
-          <span>選択科目  : </span><span>数学</span>
-          @elseif($user->subjects == 3)
-          <span>選択科目  : </span><span>英語</span>
-          @endif
+            @if($user->subjects == "1")
+            <span>選択科目 : </span><span>国語</span>
+            @elseif($user->subjects == "2")
+            <span>選択科目  : </span><span>数学</span>
+            @elseif($user->subjects == "3")
+            <span>選択科目  : </span><span>英語</span>
+            @endif
           </div>
         @endif
       </div>
@@ -97,11 +98,12 @@
           </div>
           <div class="selected_engineer">
             <label>選択科目</label>
-            <select name="subjects" form="userSearchRequest" class="engineer">
-              <option selected disabled>----</option>
-              <option value="1">国語</option>
-              <option value="2">数学</option>
-              <option value="3">英語</option>
+              @foreach($subjects as $subject)
+                <div class="">
+                  <input type="checkbox" name="subject[]" value="{{ $subject->id }}"form="userSearchRequest">
+                  <label>{{ $subject->subject }}</label>
+                </div>
+              @endforeach
             </select>
           </div>
         </div>
