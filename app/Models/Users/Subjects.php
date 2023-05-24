@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Users\User;
 
+
 class Subjects extends Model
 {
     const UPDATED_AT = null;

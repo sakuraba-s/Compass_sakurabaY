@@ -8,18 +8,16 @@ class SelectIds implements DisplayUsers{
 
   // 改修課題：選択科目の検索機能
   public function resultUsers($keyword, $category, $updown, $gender, $role, $subjects){
+    // 性別を設定
     if(is_null($gender)){
-      // カテゴリ「id」科目未選択（全て）性別未選択（全て）
       $gender = ['1', '2'];
     }else{
-      // カテゴリ「id」科目未選択（全て）性別絞り込み
       $gender = array($gender);
     }
+    // 権限を設定
     if(is_null($role)){
-      // カテゴリ「id」科目未選択（全て）権限未選択（全て）
       $role = ['1', '2', '3', '4'];
     }else{
-      // カテゴリ「id」科目未選択（全て）権限絞り込み
       $role = array($role);
     }
 

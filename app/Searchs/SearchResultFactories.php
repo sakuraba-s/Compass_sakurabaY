@@ -10,20 +10,18 @@ class SearchResultFactories{
     // カテゴリが「名前」
     if($category == 'name'){
       if(is_null($subjects)){
-        // カテゴリ「名前」科目未選択（全て）
         $searchResults = new SelectNames();
       }else{
-        // カテゴリ「名前」かつ科目絞り込み
+      // 科目あり
         $searchResults = new SelectNameDetails();
       }
       return $searchResults->resultUsers($keyword, $category, $updown, $gender, $role, $subjects);
     // カテゴリが「id」
     }else if($category == 'id'){
-      // カテゴリ「id」科目未選択（全て）
       if(is_null($subjects)){
         $searchResults = new SelectIds();
       }else{
-        // カテゴリ「id」かつ科目絞り込み
+      // 科目あり
         $searchResults = new SelectIdDetails();
       }
       return $searchResults->resultUsers($keyword, $category, $updown, $gender, $role, $subjects);

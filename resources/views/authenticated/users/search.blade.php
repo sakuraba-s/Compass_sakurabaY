@@ -46,11 +46,12 @@
         <!-- 生徒ならば選択科目を表示 -->
         @if($user->role == 4)
           <div>
-            @if($user->subjects == "1")
+            <span>ああ</span>
+            @if($user->subjects->id == "1")
             <span>選択科目 : </span><span>国語</span>
-            @elseif($user->subjects == "2")
+            @elseif($user->subject->id == "2")
             <span>選択科目  : </span><span>数学</span>
-            @elseif($user->subjects == "3")
+            @elseif($user->subject->id == "3")
             <span>選択科目  : </span><span>英語</span>
             @endif
           </div>
@@ -100,7 +101,7 @@
             <label>選択科目</label>
               @foreach($subjects as $subject)
                 <div class="">
-                  <input type="checkbox" name="subject[]" value="{{ $subject->id }}"form="userSearchRequest">
+                  <input type="checkbox" name="subjects" value="{{ $subject->id }}"form="userSearchRequest">
                   <label>{{ $subject->subject }}</label>
                 </div>
               @endforeach
