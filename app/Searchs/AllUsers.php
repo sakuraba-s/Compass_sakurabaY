@@ -8,10 +8,9 @@ use App\Models\Users\User;
 class AllUsers implements DisplayUsers{
 
   public function resultUsers($keyword, $category, $updown, $gender, $role, $subjects){
-    // $users = User::all();
-    $users = User::with('subjects')->get();
+    $users = User::all();
+    // $users = User::with('subjects')->get();
     return $users;
   }
-
 
 }

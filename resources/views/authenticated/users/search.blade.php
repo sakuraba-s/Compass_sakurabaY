@@ -45,16 +45,18 @@
       <div>
         <!-- 生徒ならば選択科目を表示 -->
         @if($user->role == 4)
-          <div>
-            <span>ああ</span>
-            @if($user->subjects->id == "1")
-            <span>選択科目 : </span><span>国語</span>
-            @elseif($user->subject->id == "2")
-            <span>選択科目  : </span><span>数学</span>
-            @elseif($user->subject->id == "3")
-            <span>選択科目  : </span><span>英語</span>
-            @endif
-          </div>
+        <span>選択科目 : </span>
+          @foreach($user->subjects as $subject)
+            <div>
+              @if($subject->id == "1")
+              <span>国語</span>
+              @elseif($subject->id == "2")
+              <span>数学</span>
+              @elseif($subject->id == "3")
+              <span>英語</span>
+              @endif
+            </div>
+          @endforeach
         @endif
       </div>
     </div>

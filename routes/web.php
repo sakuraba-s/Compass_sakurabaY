@@ -41,10 +41,12 @@ Route::group(['middleware' => 'auth'], function(){
         });
         Route::namespace('BulletinBoard')->group(function(){
             Route::get('/bulletin_board/posts/{keyword?}', 'PostsController@show')->name('post.show');
+            // 投稿画面
             Route::get('/bulletin_board/input', 'PostsController@postInput')->name('post.input');
             Route::get('/bulletin_board/like', 'PostsController@likeBulletinBoard')->name('like.bulletin.board');
             Route::get('/bulletin_board/my_post', 'PostsController@myBulletinBoard')->name('my.bulletin.board');
             Route::post('/bulletin_board/create', 'PostsController@postCreate')->name('post.create');
+            
             Route::post('/create/main_category', 'PostsController@mainCategoryCreate')->name('main.category.create');
             Route::post('/create/sub_category', 'PostsController@subCategoryCreate')->name('sub.category.create');
             Route::get('/bulletin_board/post/{id}', 'PostsController@postDetail')->name('post.detail');

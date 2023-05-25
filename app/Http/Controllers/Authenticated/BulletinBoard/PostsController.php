@@ -43,7 +43,9 @@ class PostsController extends Controller
         return view('authenticated.bulletinboard.post_detail', compact('post'));
     }
 
+    // 投稿画面の表示
     public function postInput(){
+        // メインカテゴリを取得
         $main_categories = MainCategory::get();
         return view('authenticated.bulletinboard.post_create', compact('main_categories'));
     }
