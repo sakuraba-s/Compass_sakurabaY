@@ -14,9 +14,13 @@ class SubCategory extends Model
     ];
     public function mainCategory(){
         // リレーションの定義
+        return $this->hasMany('App\Models\Categories\subCategory');
     }
 
     public function posts(){
         // リレーションの定義
+        // 投稿とサブカテゴリ―との中間テーブル
+        // 投稿＿サブカテゴリ
+        return $this->belongsToMany('App\Models\Posts\Post', 'post_sub_categories', 'sub_category_id', 'post_id')->withPivot('id');
     }
 }

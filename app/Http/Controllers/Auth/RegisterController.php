@@ -92,10 +92,12 @@ class RegisterController extends Controller
                 // ユーザ情報と科目の紐づけ
                 $user->subjects()->attach($subjects);
                 // commitメソッドでデータベースに反映
+                // トランザクション
                 DB::commit();
                 return view('auth.login.login');
             }catch(\Exception $e){
                 // これまでのデータベースの変更をトランザクションの開始時まで戻す
+                // トランザクション
                 DB::rollback();
                 return redirect()->route('loginView');
             }

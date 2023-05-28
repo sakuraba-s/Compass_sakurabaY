@@ -3,6 +3,8 @@
 namespace App\Models\Posts;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Categories\subCategory;
+
 
 class Post extends Model
 {
@@ -25,6 +27,9 @@ class Post extends Model
 
     public function subCategories(){
         // リレーションの定義
+        // 投稿とサブカテゴリ―との中間テーブル
+        // 投稿＿サブカテゴリ
+        return $this->belongsToMany('App\Models\Categories\subCategory', 'post_sub_categories','post_id','sub_category_id')->withPivot('id');
     }
 
     // コメント数

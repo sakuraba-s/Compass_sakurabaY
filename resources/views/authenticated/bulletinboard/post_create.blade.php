@@ -9,7 +9,11 @@
         @foreach($main_categories as $main_category)
         <optgroup label="{{ $main_category->main_category }}"></optgroup>
         <!-- サブカテゴリー表示 -->
-        </optgroup>
+        <!-- 投稿とともに投稿とサブカテゴリを紐づけるためにサブカテゴリンのidを送る -->
+          @foreach($main_category->subCategories as $subcategory)
+            <option value="{{ $subcategory->id}}">{{ $subcategory->sub_category }}</option>
+          @endforeach
+
         @endforeach
       </select>
     </div>
@@ -33,6 +37,8 @@
     </div>
     <form action="{{ route('post.create') }}" method="post" id="postCreate">{{ csrf_field() }}</form>
   </div>
+
+  <!-- 権限に「教師」が含まれるユーザにだけ表示 -->
   @can('admin')
   <div class="w-25 ml-auto mr-auto">
     <div class="category_area mt-5 p-5">

@@ -81,6 +81,7 @@ class User extends Authenticatable
     }
 
     public function likePostId(){
+        // いいねした人のIDが認証中のユーザIDに一致
         return Like::where('like_user_id', Auth::id());
     }
 }

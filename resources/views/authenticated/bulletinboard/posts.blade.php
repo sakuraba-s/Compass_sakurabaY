@@ -36,7 +36,17 @@
       <input type="submit" name="my_posts" class="category_btn" value="自分の投稿" form="postSearchRequest">
       <ul>
         @foreach($categories as $category)
-        <li class="main_categories" category_id="{{ $category->id }}"><span>{{ $category->main_category }}<span></li>
+        <li class="main_categories" category_id="{{ $category->id }}">
+          <!-- メインカテゴリ -->
+          <span>{{ $category->main_category }}<span>
+          <!-- サブカテゴリ -->
+          <span>
+            @foreach($category->subCategories as $subcategory)
+              <!-- ここのnameで判別して送る -->
+              <input type="submit" name="category_word" class="category_btn" value=" {{ $subcategory->sub_category }}" form="postSearchRequest">
+            @endforeach
+          </span>
+        </li>
         @endforeach
       </ul>
     </div>
