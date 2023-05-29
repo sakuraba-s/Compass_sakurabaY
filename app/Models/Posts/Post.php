@@ -21,6 +21,7 @@ class Post extends Model
         return $this->belongsTo('App\Models\Users\User');
     }
 
+    // 投稿対コメント 一対多
     public function postComments(){
         return $this->hasMany('App\Models\Posts\PostComment');
     }
@@ -33,6 +34,7 @@ class Post extends Model
     }
 
     // コメント数
+    // post_commentテーブルのidの数を数える
     public function commentCounts($post_id){
         return Post::with('postComments')->find($post_id)->postComments();
     }

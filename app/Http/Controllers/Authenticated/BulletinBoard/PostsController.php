@@ -12,6 +12,10 @@ use App\Models\Posts\Like;
 use App\Models\Users\User;
 // ↓これが投稿のバリデーション
 use App\Http\Requests\BulletinBoard\PostFormRequest;
+use App\Http\Requests\BulletinBoard\CommentFormRequest;
+use App\Http\Requests\BulletinBoard\EditFormRequest;
+use App\Http\Requests\BulletinBoard\MainCategoryFormRequest;
+use App\Http\Requests\BulletinBoard\SubCategoryFormRequest;
 use Auth;
 
 class PostsController extends Controller
@@ -24,17 +28,24 @@ class PostsController extends Controller
         $post_comment = new Post;
         if(!empty($request->keyword)){
             // 検索ワード タイトル、投稿内容あいまい検索
-            $posts = Post::with('user', 'postComments')
+            $sub_category = $request->keyword;
+            $posts = Post::with('user', 'postComments','subCategories')
             ->where('post_title', 'like', '%'.$request->keyword.'%')
-            ->orWhere('post', 'like', '%'.$request->keyword.'%')->get();
+            ->orWhere('post', 'like', '%'.$request->keyword.'%')
+            ->orwhereHas('subCategories',function($q)use($sub_category){
+                $q->where('sub_category', '=', $sub_category);
+                } )->get();
 
         }else if($request->category_word){
             // 検索ワード サブカテゴリ完全一致
             $sub_category = $request->category_word;
             // echo ddd($sub_category);
             // リレーションを定義した3つのクラスとともにポストテーブルを呼び出す
-            $posts = Post::with('user', 'postComments','subCategories')->get()
-            ->whereIn('sub_category', $sub_category)->get();
+            // リレーションの情報はビューで必要
+            $posts = Post::with('user', 'postComments','subCategories')
+            ->whereHas('subCategories',function($q)use($sub_category){
+            $q->where('sub_category', '=', $sub_category);
+            } )->get();
 
         }else if($request->like_posts){
             // 認証中のユーザがいいねした投稿のIDを取得
@@ -51,6 +62,7 @@ class PostsController extends Controller
         return view('authenticated.bulletinboard.posts', compact('posts', 'categories', 'like', 'post_comment'));
     }
 
+    // 詳細画面
     public function postDetail($post_id){
         $post = Post::with('user', 'postComments')->findOrFail($post_id);
         return view('authenticated.bulletinboard.post_detail', compact('post'));
@@ -75,7 +87,7 @@ class PostsController extends Controller
             'post' => $request->post_body,
         ]);
         // リレーション
-        // 上記で新規登録したポストテーブルのidを取得
+        // 上記で新規登録したポストテーブルのidを取得しつつテーブルを取得
         $post = Post::findOrFail($post_get->id);
         // 投稿とサブカテゴリの紐づけ
         $post->subCategories()->attach($post_category_id);
@@ -83,7 +95,9 @@ class PostsController extends Controller
         return redirect()->route('post.show');
     }
 
-    public function postEdit(Request $request){
+    // 投稿編集
+    // バリデーションをかませる
+    public function postEdit(EditFormRequest $request){
         Post::where('id', $request->post_id)->update([
             'post_title' => $request->post_title,
             'post' => $request->post_body,
@@ -95,12 +109,31 @@ class PostsController extends Controller
         Post::findOrFail($id)->delete();
         return redirect()->route('post.show');
     }
-    public function mainCategoryCreate(Request $request){
-        MainCategory::create(['main_category' => $request->main_category_name]);
+
+    // メインカテゴリの追加
+    // バリデーションをかませる
+    public function mainCategoryCreate(MainCategoryFormRequest $request){
+        MainCategory::create([
+            'main_category' => $request->main_category_name
+        ]);
+        return redirect()->route('post.input');
+    }
+    // サブカテゴリの追加
+    // バリデーションをかませる
+    public function subCategoryCreate(SubCategoryFormRequest $request){
+        // メインカテゴリの取得
+        $main_category_id=$request->main_category_id;
+        // サブカテゴリの追加
+        $sub_category_get = SubCategory::create([
+            'sub_category' => $request->sub_category_name,
+            'main_category_id' => $main_category_id,
+        ]);
         return redirect()->route('post.input');
     }
 
-    public function commentCreate(Request $request){
+    // コメント投稿
+    // バリデーションをかませる
+    public function commentCreate(CommentFormRequest $request){
         PostComment::create([
             'post_id' => $request->post_id,
             'user_id' => Auth::id(),

@@ -6,14 +6,32 @@
       <div class="p-3">
         <div class="detail_inner_head">
           <div>
+            <!-- サブカテゴリ -->
+            @foreach($post->subCategories as $subCategory)
+            <p><span class="category_btn">{{ $subCategory->sub_category }}</span></p>
+            @endforeach
+
+            <!-- バリデーション -->
+            <!-- なぜか英語に。。。 -->
+            @if($errors->first('post_title'))
+            <span class="error_message">{{ $errors->first('post_title') }}</span>
+            @endif
+            @if($errors->first('post_body'))
+            <span class="error_message">{{ $errors->first('post_body') }}</span>
+            @endif
+
           </div>
           <div>
+            <!-- (;'∀') -->
+            <!-- ここは自分の投稿にのみ表示 -->
             <span class="edit-modal-open" post_title="{{ $post->post_title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}">編集</span>
+            <!-- 削除してもよろしいですか？を表示 -->
             <a href="{{ route('post.delete', ['id' => $post->id]) }}">削除</a>
           </div>
         </div>
 
         <div class="contributor d-flex">
+          <span class="ml-5">{{ $post->created_at }}</span>
           <p>
             <span>{{ $post->user->over_name }}</span>
             <span>{{ $post->user->under_name }}</span>
@@ -44,7 +62,13 @@
     <div class="comment_container border m-5">
       <div class="comment_area p-3">
         <p class="m-0">コメントする</p>
-        <textarea class="w-100" name="comment" form="commentRequest"></textarea>
+
+        <!-- バリデーション -->
+        @if($errors->first('comment'))
+        <span class="error_message">{{ $errors->first('comment') }}</span>
+        @endif
+
+        <textarea class="w-100" name="comment" form="commentRequest">        </textarea>
         <input type="hidden" name="post_id" form="commentRequest" value="{{ $post->id }}">
         <input type="submit" class="btn btn-primary" form="commentRequest" value="投稿">
         <form action="{{ route('comment.create') }}" method="post" id="commentRequest">{{ csrf_field() }}</form>

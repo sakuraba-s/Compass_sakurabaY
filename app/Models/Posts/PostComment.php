@@ -17,6 +17,7 @@ class PostComment extends Model
         'comment',
     ];
 
+    // 投稿対コメント 一対多
     public function post(){
         return $this->belongsTo('App\Models\Posts\Post');
     }
