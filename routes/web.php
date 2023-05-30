@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('/reserve/calendar', 'CalendarsController@reserve')->name('reserveParts');
                 Route::post('/delete/calendar', 'CalendarsController@delete')->name('deleteParts');
             });
+            // カレンダー 教師
             Route::namespace('Admin')->group(function(){
                 Route::get('/calendar/{user_id}/admin', 'CalendarsController@show')->name('calendar.admin.show');
                 Route::get('/calendar/{id}/{data}/{part?}', 'CalendarsController@reserveDetail')->name('calendar.admin.detail');

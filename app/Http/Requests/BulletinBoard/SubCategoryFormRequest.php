@@ -34,12 +34,12 @@ class SubCategoryFormRequest extends FormRequest
     public function messages(){
         return [
 
-            'sub_category_name.required' => 'サブカテゴリを入力してください',
-            'sub_category_name.string' => '文字列で入力してください。',
-            'sub_category_name.max' => '100文字以内で入力してください。',
-            'sub_category_name.unique' => 'すでに登録されています。',
-            'main_category_id.unique' => 'メインカテゴリを選択してください',
-            'main_category_id.exists' => '存在しないメインカテゴリです',
+            'sub_category_name.required' => '※サブカテゴリを入力してください',
+            'sub_category_name.string' => '※サブカテゴリは文字列で入力してください。',
+            'sub_category_name.max' => '※サブカテゴリは100文字以内で入力してください。',
+            'sub_category_name.unique' => '※すでに登録されているサブカテゴリです。',
+            'main_category_id.unique' => '※メインカテゴリを選択してください',
+            'main_category_id.exists' => '※存在しないメインカテゴリです',
 
         ];
     }

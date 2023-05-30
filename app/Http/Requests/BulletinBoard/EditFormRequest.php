@@ -24,8 +24,6 @@ class EditFormRequest extends FormRequest
     public function rules()
     {
         return [
-            // 登録されているカテゴリかどうか
-            'post_category_id' => 'required',
             'post_title' => 'required|string|max:100',
             'post_body' => 'required|string|max:5000',
 
@@ -34,12 +32,12 @@ class EditFormRequest extends FormRequest
 
     public function messages(){
         return [
-            'post_category_id.required' => 'カテゴリは必須',
-            'post_title.required' => 'タイトルを入力してください',
-            'post_title.string' => '文字列で入力してください。',
-            'post_title.string' => 'タイトルは100文字以内で入力してください',
-            'post_body.string' => '文字列で入力してください。',
-            'post_body.string' => '本文は5000文字以内で入力してください',
+            'post_title.required' => '※タイトルを入力してください',
+            'post_title.string' => '※タイトルは文字列で入力してください。',
+            'post_title.string' => '※タイトルは100文字以内で入力してください',
+            'post_body.required' => '※本文を入力してください',
+            'post_body.string' => '※本文は文字列で入力してください。',
+            'post_body.string' => '※本文は5000文字以内で入力してください',
         ];
     }
 }

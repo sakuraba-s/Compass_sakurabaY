@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 // フォームリクエストの読み込み
 use Illuminate\Http\Request;
-use App\Http\Requests\TestPostRequest;
+use App\Http\Requests\registerPostRequest;
 // use DB;
 
 use App\Models\Users\Subjects;
@@ -55,6 +55,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
+    // 登録画面の表示
     public function registerView()
     {
         $subjects = Subjects::all();
@@ -63,7 +64,7 @@ class RegisterController extends Controller
 
     // ユーザ新規登録
     // バリデーションをかませる
-    public function registerPost(TestPostRequest $request)
+    public function registerPost(registerPostRequest $request)
     {
         DB::beginTransaction();
         try{
@@ -71,6 +72,7 @@ class RegisterController extends Controller
             $old_year = $request->old_year;
             $old_month = $request->old_month;
             $old_day = $request->old_day;
+            // 年月日
             $data = $old_year . '-' . $old_month . '-' . $old_day;
             $birth_day = date('Y-m-d', strtotime($data));
             $subjects = $request->subject;

@@ -31,10 +31,10 @@ class MainCategoryFormRequest extends FormRequest
     }
     public function messages(){
         return [
-            'main_category_name.required' => '入力してください',
-            'main_category_name.string' => '文字列で入力してください。',
-            'main_category_name.max' => '100文字以内で入力してください。',
-            'main_category_name.unique' => 'すでに登録されています。',
+            'main_category_name.required' => '※メインカテゴリを入力してください',
+            'main_category_name.string' => '※メインカテゴリは文字列で入力してください。',
+            'main_category_name.max' => '※メインカテゴリは100文字以内で入力してください。',
+            'main_category_name.unique' => '※すでに登録されているメインカテゴリです。',
         ];
     }
 }
