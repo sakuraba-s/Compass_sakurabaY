@@ -14,6 +14,7 @@ use DB;
 
 class CalendarsController extends Controller
 {
+    // スクール予約カレンダー表示
     public function show(){
         $calendar = new CalendarView(time());
         return view('authenticated.calendar.admin.calendar', compact('calendar'));

@@ -24,8 +24,11 @@ class CalendarWeek{
      $days = [];
 
      $startDay = $this->carbon->copy()->startOfWeek();
+    // 開始日
      $lastDay = $this->carbon->copy()->endOfWeek();
+    //  最終日
      $tmpDay = $startDay->copy();
+     
      while($tmpDay->lte($lastDay)){
        if($tmpDay->month != $this->carbon->month){
          $day = new CalendarWeekBlankDay($tmpDay->copy());

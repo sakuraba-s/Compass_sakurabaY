@@ -1,8 +1,12 @@
 <?php
 namespace App\Calendars\General;
 
+// 日時を扱うクラス
+// 様々なインスタンス(今日、明日など)を取得できる
 use Carbon\Carbon;
 use Auth;
+use App\Calendars\General\CalendarWeek;
+
 
 class CalendarView{
 
@@ -11,10 +15,12 @@ class CalendarView{
     $this->carbon = new Carbon($date);
   }
 
+  // タイトル
   public function getTitle(){
     return $this->carbon->format('Y年n月');
   }
 
+  // カレンダの出力
   function render(){
     $html = [];
     $html[] = '<div class="calendar text-center">';
@@ -31,13 +37,20 @@ class CalendarView{
     $html[] = '</tr>';
     $html[] = '</thead>';
     $html[] = '<tbody>';
+    // 週カレンダーオブジェクトの配列を取得
+    // getweeksは下に記載のメソッド
+    // 1から月末までの取得
     $weeks = $this->getWeeks();
+
     foreach($weeks as $week){
       $html[] = '<tr class="'.$week->getClassName().'">';
 
+    // getDaysは変数weekの中でニューしているCalendarWeekの中にあるメソッド
       $days = $week->getDays();
       foreach($days as $day){
+        // 開始日
         $startDay = $this->carbon->copy()->format("Y-m-01");
+        // 今日
         $toDay = $this->carbon->copy()->format("Y-m-d");
 
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
@@ -47,6 +60,7 @@ class CalendarView{
         }
         $html[] = $day->render();
 
+        // 配列の中に指定した値が存在するかチェックする関数
         if(in_array($day->everyDay(), $day->authReserveDay())){
           $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
           if($reservePart == 1){
@@ -80,16 +94,26 @@ class CalendarView{
     return implode('', $html);
   }
 
+    // 1から月末までの取得
   protected function getWeeks(){
     $weeks = [];
     $firstDay = $this->carbon->copy()->firstOfMonth();
+    // 初日
     $lastDay = $this->carbon->copy()->lastOfMonth();
+    // 月末
+    // 別のファイルCalendarWeekをニューして使えるようにする
     $week = new CalendarWeek($firstDay->copy());
+
     $weeks[] = $week;
+
+    // 作業用の日
+    // +7日した後、週の開始日に移動する
     $tmpDay = $firstDay->copy()->addDay(7)->startOfWeek();
+    // 月末までループ
     while($tmpDay->lte($lastDay)){
       $week = new CalendarWeek($tmpDay, count($weeks));
       $weeks[] = $week;
+      //次の週=+7日する
       $tmpDay->addDay(7);
     }
     return $weeks;

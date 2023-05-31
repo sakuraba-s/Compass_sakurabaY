@@ -15,6 +15,8 @@ class CalendarsController extends Controller
 {
     // スクール予約カレンダー表示
     public function show(){
+        // カレンダー表示のためのクラスを呼び出す
+        // 今月のカレンダーを表示するために現在時刻を渡す
         $calendar = new CalendarView(time());
         return view('authenticated.calendar.general.calendar', compact('calendar'));
     }
