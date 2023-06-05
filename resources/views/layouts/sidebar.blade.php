@@ -22,7 +22,6 @@
       <p><a href="{{ route('top.show') }}">トップ</a></p>
       <p><a href="/logout">ログアウト</a></p>
       <p><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}">スクール予約</a></p>
-      <p><a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}">スクール予約</a></p>
 
       <!-- 権限に「教師」が含まれるユーザにだけ表示 -->
     @can('admin')

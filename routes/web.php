@@ -28,14 +28,17 @@ Route::group(['middleware' => 'auth'], function(){
         });
         Route::namespace('Calendar')->group(function(){
             Route::namespace('General')->group(function(){
+                // スクール予約
                 Route::get('/calendar/{user_id}', 'CalendarsController@show')->name('calendar.general.show');
                 Route::post('/reserve/calendar', 'CalendarsController@reserve')->name('reserveParts');
                 Route::post('/delete/calendar', 'CalendarsController@delete')->name('deleteParts');
             });
-            // カレンダー 教師
             Route::namespace('Admin')->group(function(){
+                // スクール予約確認
                 Route::get('/calendar/{user_id}/admin', 'CalendarsController@show')->name('calendar.admin.show');
+
                 Route::get('/calendar/{id}/{data}/{part?}', 'CalendarsController@reserveDetail')->name('calendar.admin.detail');
+                // スクール枠登録
                 Route::get('/setting/{user_id}/admin', 'CalendarsController@reserveSettings')->name('calendar.admin.setting');
                 Route::post('/setting/update/admin', 'CalendarsController@updateSettings')->name('calendar.admin.update');
             });

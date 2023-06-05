@@ -14,18 +14,20 @@ use DB;
 
 class CalendarsController extends Controller
 {
-    // スクール予約カレンダー表示
+    // スクール予約・予約確認
     public function show(){
         $calendar = new CalendarView(time());
         return view('authenticated.calendar.admin.calendar', compact('calendar'));
     }
 
-    public function reserveDetail($user_id = 0, $date, $part){
+    public function reserveDetail($user_id = 0, $date=0, $part=0){
         $reservePersons = ReserveSettings::with('users')->where('setting_reserve', $date)->where('setting_part', $part)->get();
         return view('authenticated.calendar.admin.reserve_detail', compact('reservePersons', 'date', 'part'));
     }
 
+    // スクール枠登録(教師のみ)
     public function reserveSettings(){
+        // 現在日時のタイムススタンプの取得
         $calendar = new CalendarSettingView(time());
         return view('authenticated.calendar.admin.reserve_setting', compact('calendar'));
     }
