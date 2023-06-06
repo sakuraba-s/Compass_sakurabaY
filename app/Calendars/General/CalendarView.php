@@ -45,24 +45,41 @@ class CalendarView{
     foreach($weeks as $week){
       $html[] = '<tr class="'.$week->getClassName().'">';
 
-    // getDaysは変数weekの中でニューしているCalendarWeekの中にあるメソッド
+
       $days = $week->getDays();
+      // getDaysは変数weekの中でニューしているCalendarWeekの中にあるメソッド
+      // ★
+      // 一週間分の日付
       foreach($days as $day){
         // 開始日
         $startDay = $this->carbon->copy()->format("Y-m-01");
         // 今日
         $toDay = $this->carbon->copy()->format("Y-m-d");
 
+
+        // 過去日をグレーにする
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-          $html[] = '<td class="calendar-td">';
+          $html[] = '<td class="past-day calendar-td">';
         }else{
           $html[] = '<td class="calendar-td '.$day->getClassName().'">';
         }
         $html[] = $day->render();
 
         // 配列の中に指定した値が存在するかチェックする関数
+        // ※※分岐⓵予約しているかどうか※※
         if(in_array($day->everyDay(), $day->authReserveDay())){
+          // 変数daysのgetDaysメソッド の中にあるメソッド
+          // CalendarWeekの中にあるメソッド
+          // ★
+          // 一週間分の日付を「Y-m-d」の形に直したもの
+          // の中に
+          // ログインユーザと紐づく(予約している)開講日が含まれる場合
+
           $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
+          // 予約枠
+
+
+
           if($reservePart == 1){
             $reservePart = "リモ1部";
           }else if($reservePart == 2){
@@ -78,6 +95,7 @@ class CalendarView{
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }
         }else{
+          // selectボックスを設置
           $html[] = $day->selectPart($day->everyDay());
         }
         $html[] = $day->getDate();

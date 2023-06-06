@@ -44,16 +44,28 @@ class CalendarSettingView{
       $html[] = '<tr class="'.$week->getClassName().'">';
       $days = $week->getDays();
       // ※変数weekが呼び出している別のファイルにあるクラス、CalendarWeek内にあるfunctionの名前
+      // 日々の繰り返し、一週間分を取得した結果のこと
 
       foreach($days as $day){
         $startDay = $this->carbon->format("Y-m-01");
+        // 今月の初日を取得
         $toDay = $this->carbon->format("Y-m-d");
+        // 本日を取得
 
+
+        // 過去日をグレーにする
        if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
+        // everyDayはCalendarWeekDayクラスにあるメソッド
+        // 月初が
+        // かつ今日が
+        // クラスにpastを追記する(cssでグレーを充てる)
           $html[] = '<td class="past-day border">';
         }else{
+          // そのほかはpastなし(グレーアウトにならない)
           $html[] = '<td class="border '.$day->getClassName().'">';
         }
+
+
         $html[] = $day->render();
         $html[] = '<div class="adjust-area">';
         if($day->everyDay()){

@@ -20,6 +20,7 @@ class CalendarWeek{
    * @return
    */
 
+  // 日々の繰り返し、一週間分を取得する
    function getDays(){
      $days = [];
 

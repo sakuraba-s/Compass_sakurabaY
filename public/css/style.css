@@ -43,6 +43,8 @@ li{
 .day-sun{
   color:#FF0000;
 }
+
+/* 過去日をグレーにする */
 .past-day{
   background:#EEE;
 }
