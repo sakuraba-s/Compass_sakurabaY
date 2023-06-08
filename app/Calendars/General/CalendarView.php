@@ -76,8 +76,8 @@ class CalendarView{
           // ログインユーザと紐づく(予約している)開講日が含まれる場合
 
           $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
-          // 予約枠
-
+          // 予約枠の数字を取得
+          // 予約を入れているログインユーザ情報のうち、その予約日の「何部」かどうかの部分を取得
 
 
           if($reservePart == 1){
@@ -87,16 +87,39 @@ class CalendarView{
           }else if($reservePart == 3){
             $reservePart = "リモ3部";
           }
+          // 数字を表示するための文言に書き換える
+
+          // 予約ありのパターンをさらに二パターンに分ける
+          // １．予約ありで過去
+          // ２．予約ありで未来
           if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px"></p>';
+            // ある日付が当月の１日より大きくて
+            // かつ
+            // ある日付が本日より小さい場合
+            // ※つまりある日付が当月の1日～昨日までの場合 過去
+
+            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">'.$reservePart.'参加</p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }else{
+            // 予約ありで未来 予約キャンセルができるボタンが出現
+            // 上段：ボタンの中に予約枠を表示
+            // 下段：モーダルに中に予約枠の情報を送信
             $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }
         }else{
-          // selectボックスを設置
-          $html[] = $day->selectPart($day->everyDay());
+          // 予約なしのパターンをさらに二パターンに分ける
+          // １．予約なしで過去
+          // ２．予約なしで未来
+          if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
+            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">受付終了</p>';
+          }else{
+            // selectボックスを設置
+            $html[] = $day->selectPart($day->everyDay());
+          }
+
+
+
         }
         $html[] = $day->getDate();
         $html[] = '</td>';

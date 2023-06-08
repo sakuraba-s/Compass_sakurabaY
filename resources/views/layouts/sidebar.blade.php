@@ -13,6 +13,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&family=Oswald:wght@200&display=swap" rel="stylesheet">
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+  <!-- JQueryを読み込む(この記述が無いと使えないよ) -->
+  <script src="{{ asset('https://code.jquery.com/jquery-3.4.1.min.js')}}"></script>
+  <script src="{{ asset('js/calendar.js')}}"></script>
 </head>
 
 <body class="all_content">

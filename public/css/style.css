@@ -68,6 +68,8 @@ li{
   width:70%;
 }
 
+
+/* キャンセルのモーダル */
 /* モーダル */
 .modal{
     display: none;

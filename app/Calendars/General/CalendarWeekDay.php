@@ -80,13 +80,15 @@ class CalendarWeekDay{
 
    function authReserveDay(){
     // 開講日の配列を取得する
-    // ユーザモデルとスクール予約とのリレーションを使う
-    // ログインユーザと紐づく(予約している)開講日を取得する
+    // ユーザモデルとスクール予約とのリレーションを使う（中間テーブル）
+    // ログインユーザと紐づく(予約している)開講日を配列で取得
      return Auth::user()->reserveSettings->pluck('setting_reserve')->toArray();
    }
 
    function authReserveDate($reserveDate){
-    // 開講日が
+    // ログインユーザの予約日を取得
+    // 開講日が予約日に一致するユーザ情報を取得
+    // （予約を入れている場合に、そのログイン中のユーザ情報を取得）
      return Auth::user()->reserveSettings->where('setting_reserve', $reserveDate);
    }
 
