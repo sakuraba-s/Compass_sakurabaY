@@ -97,15 +97,21 @@ class CalendarView{
             // かつ
             // ある日付が本日より小さい場合
             // ※つまりある日付が当月の1日～昨日までの場合 過去
-
+            // 予約あり過去
             $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">'.$reservePart.'参加</p>';
-            $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+
           }else{
-            // 予約ありで未来 予約キャンセルができるボタンが出現
+            // 予約ありで未来
+            // 予約キャンセルができるボタンが出現
             // 上段：ボタンの中に予約枠を表示
             // 下段：モーダルに中に予約枠の情報を送信
-            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
+
+            data-postでデータ送信？
+            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px"  value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
+            // パート情報を送信するのはselectボックスと、この予約済みの場所
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+            $html[] = $day->getDate();
+
           }
         }else{
           // 予約なしのパターンをさらに二パターンに分ける
@@ -116,12 +122,10 @@ class CalendarView{
           }else{
             // selectボックスを設置
             $html[] = $day->selectPart($day->everyDay());
+            $html[] = $day->getDate();
+
           }
-
-
-
         }
-        $html[] = $day->getDate();
         $html[] = '</td>';
       }
       $html[] = '</tr>';

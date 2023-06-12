@@ -70,6 +70,7 @@ class CalendarWeekDay{
      return implode('', $html);
    }
 
+  //  予約枠取得のための日付の送信
    function getDate(){
      return '<input type="hidden" value="'. $this->carbon->format('Y-m-d') .'" name="getData[]" form="reserveParts">';
    }

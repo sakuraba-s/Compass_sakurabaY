@@ -18,7 +18,12 @@
                 <div class="modal__content">
                         <!-- 取得した投稿内容をモーダルのどこへ渡すかの判別のためにクラス名「modal_post」「modal_id」を設定-->
                             <!-- ※ここの空欄部分valueにiQueryで渡した投稿idが入ってくる -->
-                            <p>予約日：{{$part}}</p>
+                            <!-- フォーム送信された予約枠の情報空予約日の部分を表示 -->
+                            <p name="getDate" class="modal_date">予約日：</p>
+                            <!-- ※ここの空欄部分valueにiQueryで渡した投稿idが入ってくる -->
+
+                            
+                            <input type="hidden" name="date" class="getDate" value="">
                             <p>時間：</p>
                             <p>上記の予約をキャンセルしてもよろしいですか？</p>
                         <input type="hidden" name="id" class="modal_id" value="">
@@ -26,7 +31,9 @@
                         <!-- キャンセルせずにカレンダーに戻る -->
                         <button type="submit" class="modal_submit">閉じる</button>
                         <!-- キャンセルを実行 -->
-                        <button type="submit" class="modal_submit">キャンセル</button>
+                        <div class="text-right w-75 m-auto">
+                          <input type="submit" class="btn btn-primary modal_submit" value="キャンセル実行" form="deleteParts">
+                        </div>
                 </div>
 
 
