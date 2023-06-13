@@ -6,6 +6,8 @@ namespace App\Calendars\General;
 use Carbon\Carbon;
 use Auth;
 use App\Calendars\General\CalendarWeek;
+// use Illuminate\Http\Request;
+
 
 
 class CalendarView{
@@ -106,11 +108,14 @@ class CalendarView{
             // 上段：ボタンの中に予約枠を表示
             // 下段：モーダルに中に予約枠の情報を送信
 
-            data-postでデータ送信？
-            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px"  value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
+            //ボタンを押下するとモーダルに ★data-任意の属性の名前 でデータ送信する
+            // $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px"  value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
             // パート情報を送信するのはselectボックスと、この予約済みの場所
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
             $html[] = $day->getDate();
+
+            // 予約日と予約パートをくっつけて表示
+            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" data-date="{{ $day }}" data-part="{{ $reservePart }}" style="font-size:12px"  value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
 
           }
         }else{

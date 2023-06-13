@@ -16,17 +16,12 @@
                 <!-- ここのbgに対して薄い色をcssで引く -->
                 <div class="modal__bg"></div>
                 <div class="modal__content">
-                        <!-- 取得した投稿内容をモーダルのどこへ渡すかの判別のためにクラス名「modal_post」「modal_id」を設定-->
-                            <!-- ※ここの空欄部分valueにiQueryで渡した投稿idが入ってくる -->
-                            <!-- フォーム送信された予約枠の情報空予約日の部分を表示 -->
-                            <p name="getDate" class="modal_date">予約日：</p>
-                            <!-- ※ここの空欄部分valueにiQueryで渡した投稿idが入ってくる -->
+                    <!-- 取得した投稿内容をモーダルのどこへ渡すかの判別のためにクラス名「modal_date」「modal_part」を設定-->
+                        <!-- ※ここの空欄部分valueにiQueryで設定したデータが入ってくる -->
+                        <p><span>予約日：</span><span name="gePart" class="modal_date"></span></p>
+                        <p><span>時間：</span><span name="getDate" class="modal_part"></span></p>
 
-                            
-                            <input type="hidden" name="date" class="getDate" value="">
-                            <p>時間：</p>
-                            <p>上記の予約をキャンセルしてもよろしいですか？</p>
-                        <input type="hidden" name="id" class="modal_id" value="">
+                        <p>上記の予約をキャンセルしてもよろしいですか？</p>
 
                         <!-- キャンセルせずにカレンダーに戻る -->
                         <button type="submit" class="modal_submit">閉じる</button>
