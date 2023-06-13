@@ -81,6 +81,8 @@
     </div>
   </div>
 </div>
+
+<!-- 編集のモーダル機能 -->
 <div class="modal js-modal">
   <div class="modal__bg js-modal-close"></div>
   <div class="modal__content">

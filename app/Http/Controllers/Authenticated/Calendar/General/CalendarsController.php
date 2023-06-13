@@ -54,14 +54,14 @@ class CalendarsController extends Controller
     public function delete(Request $request){
         DB::beginTransaction();
 
-        $getPart = $request->getPart;
-        $getDate = $request->getData;
-        ddd($getPart);
+        $getPart = $request->modal_part;
+        $getDate = $request->modal_date;
+        ddd($getDate);
 
 
         try{
-            $getPart = $request->getPart;
-            $getDate = $request->getData;
+            $getPart = $request->modal_date;
+            $getDate = $request->modal_date;
 
             $deleteDays = array_filter(array_combine($getDate, $getPart));
             foreach($deleteDays as $key => $value){

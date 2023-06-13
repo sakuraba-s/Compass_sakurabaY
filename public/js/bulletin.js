@@ -48,6 +48,7 @@ $(function () {
     });
   });
 
+  // 編集モーダルデータ受け渡し
   $('.edit-modal-open').on('click',function(){
     $('.js-modal').fadeIn();
     var post_title = $(this).attr('post_title');
