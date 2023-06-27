@@ -155,12 +155,20 @@ class PostsController extends Controller
         return view('authenticated.bulletinboard.post_like', compact('posts', 'like'));
     }
 
+
+    // いいね機能
+    // 投稿にいいねをつける
     public function postLike(Request $request){
+        // ログインユーザのIDを取得
         $user_id = Auth::id();
+        // 該当の投稿のIDを取得
         $post_id = $request->post_id;
 
+        // いいねをカウントするメソッドをニューする
+        // Likeモデル
         $like = new Like;
 
+        // ライクテーブルに新たに登録する
         $like->like_user_id = $user_id;
         $like->like_post_id = $post_id;
         $like->save();
@@ -168,6 +176,7 @@ class PostsController extends Controller
         return response()->json();
     }
 
+    // 投稿にいいねを解除する
     public function postUnLike(Request $request){
         $user_id = Auth::id();
         $post_id = $request->post_id;

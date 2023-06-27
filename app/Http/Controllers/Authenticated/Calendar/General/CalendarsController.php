@@ -35,6 +35,7 @@ class CalendarsController extends Controller
 
             $reserveDays = array_filter(array_combine($getDate, $getPart));
             foreach($reserveDays as $key => $value){
+
                 $reserve_settings = ReserveSettings::where('setting_reserve', $key)->where('setting_part', $value)->first();
                 // 予約枠を減らす
                 $reserve_settings->decrement('limit_users');
@@ -49,30 +50,22 @@ class CalendarsController extends Controller
     }
 
 
-
     // スクール予約キャンセル
     public function delete(Request $request){
         DB::beginTransaction();
 
-        $getPart = $request->modal_part;
-        $getDate = $request->modal_date;
-        ddd($getDate);
-
-
         try{
-            $getPart = $request->modal_date;
+            $settingPart = $request->setting_part;
             $getDate = $request->modal_date;
 
-            $deleteDays = array_filter(array_combine($getDate, $getPart));
-            foreach($deleteDays as $key => $value){
-                $reserve_settings = ReserveSettings::where('setting_reserve', $key)->where('setting_part', $value)->first();
-                $reserve_settings->increment('limit_users');
-                $reserve_settings->users()->detach(Auth::id());
-            }
+            $reserve_settings = ReserveSettings::where('setting_reserve', $getDate)->where('setting_part', $settingPart)->first();
+            // ddd($reserve_settings);
+            $reserve_settings->increment('limit_users');
+            // リレーションの処理
+            $reserve_settings->users()->detach(Auth::id());
             DB::commit();
         }catch(\Exception $e){
             DB::rollback();
-
         }
         return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
     }

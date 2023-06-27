@@ -116,7 +116,13 @@ class CalendarView{
 
             // 予約日と予約パートをくっつけて表示
             // モーダルに値を渡す 書き方注意 ﾄﾞｯﾄで囲ったうえで、シングルで囲う
-            $html[] = '<button type="submit" class="btn btn-danger cancel-modal-open p-0 w-75" name="delete_date" data-date="'.$day->authReserveDate($day->everyDay())->first()->setting_reserve .'" data-part="'. $reservePart.'" style="font-size:12px"  value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
+            $html[] = '<button type="submit" class="btn btn-danger cancel-modal-open p-0 w-75"
+                        name="delete_date"
+                        data-date="'.$day->authReserveDate($day->everyDay())->first()->setting_reserve .'"
+                        data-part="'. $reservePart.'"
+                        data-settingpart="'. $day->authReserveDate($day->everyDay())->first()->setting_part.'"
+                        style="font-size:12px"
+                        value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
 
           }
         }else{

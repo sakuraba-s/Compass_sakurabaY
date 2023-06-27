@@ -4,13 +4,18 @@ $(function () {
     $('.category_num' + category_id).slideToggle();
   });
 
+  // クリックするといいね数が増減する
   $(document).on('click', '.like_btn', function (e) {
     e.preventDefault();
     $(this).addClass('un_like_btn');
     $(this).removeClass('like_btn');
     var post_id = $(this).attr('post_id');
+    // クラス名like_counts' + post_idをテキストとして変数に定義
+
     var count = $('.like_counts' + post_id).text();
     var countInt = Number(count);
+    // 指定した引数を数値に変換した結果を返す
+
     $.ajax({
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       method: "post",

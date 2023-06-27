@@ -27,33 +27,57 @@ class CalendarWeekDay{
   function dayPartCounts($ymd){
     $html = [];
     $one_part = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '1')->first();
+    // その日の一部を予約しているユーザを取得
     $two_part = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '2')->first();
+    // その日の２部を予約しているユーザを取得
     $three_part = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '3')->first();
+    // その日の３部を予約しているユーザを取得
+
+  // 予約可能枠を取得
+  // 該当のメソッドを呼び出す
+  $one_part_frame=$this->onePartFrame($ymd);
+  $two_part_frame=$this->twoPartFrame($ymd);
+  $three_part_frame=$this->threePartFrame($ymd);
+  // ddd($part_frame);
+
+
 
     $html[] = '<div class="text-left">';
+
+
+  
     if($one_part){
-      $html[] = '<p class="day_part m-0 pt-1">1部</p>';
+        //   ２つの値をポスト送信する
+        // ログインユーザのid 予約日 予約パート
+      $html[] = '<p class="day_part m-0 pt-1">1部
+      <a href="/calendar/{id}/'.$ymd.'/1">'.$one_part_frame.'</a></p>';
     }
     if($two_part){
-      $html[] = '<p class="day_part m-0 pt-1">2部</p>';
+      $html[] = '<p class="day_part m-0 pt-1">2部
+      <a href="/calendar/{id}/'.$ymd.'/1">'.$two_part_frame.'</a></p>';
     }
     if($three_part){
-      $html[] = '<p class="day_part m-0 pt-1">3部</p>';
+      $html[] = '<p class="day_part m-0 pt-1">3部
+      <a href="/calendar/{id}/'.$ymd.'/1">'.$three_part_frame.'</a></p>';
     }
     $html[] = '</div>';
 
+    // 第一引数には要素の間にはさみたい区切り文字を指定
     return implode("", $html);
   }
 
 
+  // 予約可能枠を取得
   function onePartFrame($day){
     $one_part_frame = ReserveSettings::where('setting_reserve', $day)->where('setting_part', '1')->first();
+    // 予約のテーブルにその日で予約枠１があればリミットを取得それ以外はマックスの２０をセット
     if($one_part_frame){
       $one_part_frame = ReserveSettings::where('setting_reserve', $day)->where('setting_part', '1')->first()->limit_users;
     }else{
       $one_part_frame = "20";
     }
     return $one_part_frame;
+
   }
   function twoPartFrame($day){
     $two_part_frame = ReserveSettings::where('setting_reserve', $day)->where('setting_part', '2')->first();
@@ -78,6 +102,7 @@ class CalendarWeekDay{
   function dayNumberAdjustment(){
     $html = [];
     $html[] = '<div class="adjust-area">';
+    // 詳細画面にinputで値を送る
     $html[] = '<p class="d-flex m-0 p-0">1部<input class="w-25" style="height:20px;" name="1" type="text" form="reserveSetting"></p>';
     $html[] = '<p class="d-flex m-0 p-0">2部<input class="w-25" style="height:20px;" name="2" type="text" form="reserveSetting"></p>';
     $html[] = '<p class="d-flex m-0 p-0">3部<input class="w-25" style="height:20px;" name="3" type="text" form="reserveSetting"></p>';

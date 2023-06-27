@@ -37,6 +37,10 @@ Route::group(['middleware' => 'auth'], function(){
                 // スクール予約確認
                 Route::get('/calendar/{user_id}/admin', 'CalendarsController@show')->name('calendar.admin.show');
 
+          // スクール予約詳細
+        //   三つの値をポスト送信する
+        // ログインユーザのid 予約日 予約パート
+        // urlのカッコ内がキーとなる
                 Route::get('/calendar/{id}/{data}/{part?}', 'CalendarsController@reserveDetail')->name('calendar.admin.detail');
                 // スクール枠登録
                 Route::get('/setting/{user_id}/admin', 'CalendarsController@reserveSettings')->name('calendar.admin.setting');
@@ -57,7 +61,9 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('/bulletin_board/edit', 'PostsController@postEdit')->name('post.edit');
             Route::get('/bulletin_board/delete/{id}', 'PostsController@postDelete')->name('post.delete');
             Route::post('/comment/create', 'PostsController@commentCreate')->name('comment.create');
+            // いいねをする
             Route::post('/like/post/{id}', 'PostsController@postLike')->name('post.like');
+            // いいねを解除する
             Route::post('/unlike/post/{id}', 'PostsController@postUnLike')->name('post.unlike');
         });
         Route::namespace('Users')->group(function(){

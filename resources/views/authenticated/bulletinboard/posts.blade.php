@@ -18,15 +18,21 @@
         <div class="d-flex post_status">
           <!-- コメント数 -->
           <div class="mr-5"><i class="fa fa-comment"></i>
-            @foreach($post->postComments as $commentCount)
-            <span class="">{{ $commentCount ->count()}}</span>
-            @endforeach
+            <!-- Postモデルのメソッドを使用 -->
+            <span class="">{{ $post->postComments ->count()}}</span>
           </div>
-          <!-- いいね数 -->
+          <!-- いいね数  jsにて実装-->
+          <!-- Postモデルのメソッドを使用 -->
+          <!-- post_idでポスト送信し、コントローラで受けとる
+          ※データベース上でいいねをつける外すの機能
+          ※いいね数の増減の機能js で使う -->
+          <!-- クラス名はjsから値を受け取る目印 -->
           <div>
             @if(Auth::user()->is_Like($post->id))
+            <!-- ログインしているユーザがその投稿をいいねしている場合は赤いハート -->
             <p class="m-0"><i class="fas fa-heart un_like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}"></span></p>
             @else
+            <!-- ログインしているユーザがその投稿をいいねしていない場合はグレーのハート -->
             <p class="m-0"><i class="fas fa-heart like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}"></span></p>
             @endif
           </div>

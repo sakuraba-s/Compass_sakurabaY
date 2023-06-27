@@ -49,9 +49,8 @@
           <a class="js-modal-close btn btn-danger d-inline-block" href="">閉じる</a>
 
           <!-- 日程と時間をフォーム送信したい -->
-
           <input type="hidden" class="modal_date" name="modal_date" value="">
-          <input type="hidden" class="modal_part" name="modal_part" value="">
+          <input type="hidden" class="setting_part" name="setting_part" value="">
 
 
           <input type="submit" class="btn btn-primary d-block" value="キャンセル">

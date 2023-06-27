@@ -34,10 +34,10 @@ class EditFormRequest extends FormRequest
         return [
             'post_title.required' => '※タイトルを入力してください',
             'post_title.string' => '※タイトルは文字列で入力してください。',
-            'post_title.string' => '※タイトルは100文字以内で入力してください',
+            'post_title.max' => '※タイトルは100文字以内で入力してください',
             'post_body.required' => '※本文を入力してください',
             'post_body.string' => '※本文は文字列で入力してください。',
-            'post_body.string' => '※本文は5000文字以内で入力してください',
+            'post_body.max' => '※本文は5000文字以内で入力してください',
         ];
     }
 }
