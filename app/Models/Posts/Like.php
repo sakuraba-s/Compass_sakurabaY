@@ -18,4 +18,16 @@ class Like extends Model
     public function likeCounts($post_id){
         return $this->where('like_post_id', $post_id)->get()->count();
     }
+
+    // いいねと投稿の関係
+    public function post()
+    {
+      return $this->belongsTo(Post::class);
+    }
+
+    // いねとユーザの関係
+    public function user()
+    {
+      return $this->belongsTo(User::class);
+    }
 }

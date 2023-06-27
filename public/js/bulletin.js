@@ -4,33 +4,39 @@ $(function () {
     $('.category_num' + category_id).slideToggle();
   });
 
-  // クリックするといいね数が増減する
+  // クリックするといいね数がふえる
   $(document).on('click', '.like_btn', function (e) {
     e.preventDefault();
     $(this).addClass('un_like_btn');
     $(this).removeClass('like_btn');
     var post_id = $(this).attr('post_id');
-    // クラス名like_counts' + post_idをテキストとして変数に定義
+    // post_idという名前の属性をもつ値を取得（※ビューから送信している）
 
     var count = $('.like_counts' + post_id).text();
+    //like_counts(その投稿のID)のクラス名の中身をテキストとして取得する
     var countInt = Number(count);
-    // 指定した引数を数値に変換した結果を返す
+    // 上記の変数を数字に変換して定義する
 
+    // 非同非同期通信
     $.ajax({
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       method: "post",
       url: "/like/post/" + post_id,
+      // いいねをつけるルーティングを指定
       data: {
         post_id: $(this).attr('post_id'),
+        // 該当の投稿のID情報をもつ
       },
     }).done(function (res) {
       console.log(res);
       $('.like_counts' + post_id).text(countInt + 1);
+      // $以下のクラス名の場所にcountInt変数＋１をした数字をテキストとして表示させる
     }).fail(function (res) {
       console.log('fail');
     });
   });
 
+  // クリックするといいね数が減る
   $(document).on('click', '.un_like_btn', function (e) {
     e.preventDefault();
     $(this).removeClass('un_like_btn');

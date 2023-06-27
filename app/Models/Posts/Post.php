@@ -38,4 +38,11 @@ class Post extends Model
     public function commentCounts($post_id){
         return Post::with('postComments')->find($post_id)->postComments();
     }
+
+    // 投稿対いいねの関係
+    public function likes()
+    {
+      return $this->hasMany(Like::class,'like_post_id');
+    }
+
 }

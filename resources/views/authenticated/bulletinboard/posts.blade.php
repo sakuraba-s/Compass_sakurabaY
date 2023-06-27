@@ -30,10 +30,10 @@
           <div>
             @if(Auth::user()->is_Like($post->id))
             <!-- ログインしているユーザがその投稿をいいねしている場合は赤いハート -->
-            <p class="m-0"><i class="fas fa-heart un_like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}"></span></p>
+            <p class="m-0"><i class="fas fa-heart un_like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}">{{ $post->likes->count() }}</span></p>
             @else
             <!-- ログインしているユーザがその投稿をいいねしていない場合はグレーのハート -->
-            <p class="m-0"><i class="fas fa-heart like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}"></span></p>
+            <p class="m-0"><i class="fas fa-heart like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}">{{ $post->likes->count() }}</span></p>
             @endif
           </div>
         </div>
