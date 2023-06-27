@@ -38,8 +38,9 @@ class SelectNameDetails implements DisplayUsers{
     })
     // 科目に合致するもの どれか一つでも合致
     // whereHasの第一引数にはリレーションメソッド名
-    // useメソッド 使いたい変数
+    // useメソッド 使いたい変数 ※コントローラにて定義しているよ
     ->whereHas('subjects', function($q) use ($subjects){
+      // リレーション先のID（そのユーザと紐づいている科目のId）が検索で選択した科目と一致するケースを抽出
       $q->where('subjects.id', $subjects);
     })
     ->orderBy('over_name_kana', $updown)->get();

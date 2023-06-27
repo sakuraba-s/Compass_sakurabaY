@@ -5,6 +5,7 @@
 <div class="search_content w-100 border d-flex">
   <div class="reserve_users_area">
     <!-- コントローラから来たユーザ情報を繰り返しに入れる -->
+
     @foreach($users as $user)
     <div class="border one_person">
       <div>
@@ -103,7 +104,7 @@
             <label>選択科目</label>
               @foreach($subjects as $subject)
                 <div class="">
-                  <input type="checkbox" name="subjects" value="{{ $subject->id }}"form="userSearchRequest">
+                  <input type="checkbox" name="subjects[]" value="{{ $subject->id }}"form="userSearchRequest">
                   <label>{{ $subject->subject }}</label>
                 </div>
               @endforeach
@@ -121,5 +122,6 @@
     <!-- 検索内容をget送信 -->
     <form action="{{ route('user.show') }}" method="get" id="userSearchRequest"></form>
   </div>
+
 </div>
 @endsection

@@ -25,9 +25,11 @@ class UsersController extends Controller
         // 追加の条件
         $gender = $request->sex;
         $role = $request->role;
-        // 選択された科目をidで受け取る
-        $subjects = $request->subjects;
-        // ddd($subjects);
+        // 選択された科目をidで受け取る※複数！！
+        // $subjects = $request->subjects;
+        $subjects = $_POST['subjects'];
+        
+        ddd($subjects);
         // 検索絞り込み
         $userFactory = new SearchResultFactories();
         // initializeメソッド
