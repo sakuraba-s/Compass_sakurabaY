@@ -26,10 +26,9 @@ class UsersController extends Controller
         $gender = $request->sex;
         $role = $request->role;
         // 選択された科目をidで受け取る※複数！！
-        // $subjects = $request->subjects;
-        $subjects = $_POST['subjects'];
-        
-        ddd($subjects);
+        $subjects = $request->subjects;
+
+        // ddd($subjects);
         // 検索絞り込み
         $userFactory = new SearchResultFactories();
         // initializeメソッド
