@@ -26,8 +26,10 @@ class CalendarWeekDay{
   // 予約枠の表示をセットする
   function dayPartCounts($ymd){
     $html = [];
+    // reserve_settingsのテーブルと、それに紐づくユーザ情報を取得する
+    // setting_reserve＝開講日
     $one_part = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '1')->first();
-    // その日の一部を予約しているユーザを取得
+    // その日付が開講日でありかつ第一部である予約テーブルのデータと、それにひもづくユーザのデータ
     $two_part = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '2')->first();
     // その日の２部を予約しているユーザを取得
     $three_part = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '3')->first();
@@ -41,16 +43,20 @@ class CalendarWeekDay{
   // ddd($part_frame);
 
 
+  // 人数カウント
+  $one_part_count = ReserveSettings::withCount('users')->where('setting_reserve', $ymd)->where('setting_part', '1')->first();
+
 
     $html[] = '<div class="text-left">';
 
 
   
     if($one_part){
+        // 部数の右に予約している人数を表示する
         //   ２つの値をポスト送信する
         // ログインユーザのid 予約日 予約パート
       $html[] = '<p class="day_part m-0 pt-1">1部
-      <a href="/calendar/{id}/'.$ymd.'/1">'.$one_part_frame.'</a></p>';
+      <a href="/calendar/{id}/'.$ymd.'/1">'.$one_part_count.'</a></p>';
     }
     if($two_part){
       $html[] = '<p class="day_part m-0 pt-1">2部
