@@ -54,30 +54,40 @@ class CalendarWeekDay{
     // $one_part_count  = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '1')->get();
     // $one_part_count  = $one_part->users->id->get();
 
-    $one_part_count = ReserveSettings::withCount('users')->where('setting_reserve', $ymd)->where('setting_part', '1')->get();
-
-
-
-
+    // 予約している人数を取得
+    // 変数（one_part）の中に紐づくユーザ情報があればそれの数を取得する
+    // $one_part_count = ReserveSettings::withCount('users')->where('setting_reserve', $ymd)->where('setting_part', '1')->get();
+    // $one_part_count = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '1')->count();
+    // $one_part_count = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '1')->get();
+    $one_part_users = ReserveSettings::withCount('users')->where('setting_reserve', $ymd)->where('setting_part', '1')->get();
+    foreach($one_part_users as $one_part_user) {
+      $one_part_count = $one_part_user->users_count;
+    }
+    $two_part_users = ReserveSettings::withCount('users')->where('setting_reserve', $ymd)->where('setting_part', '2')->get();
+    foreach($two_part_users as $two_part_user) {
+      $two_part_count = $two_part_user->users_count;
+    }
+    $three_part_users = ReserveSettings::withCount('users')->where('setting_reserve', $ymd)->where('setting_part', '3')->get();
+    foreach($three_part_users as $three_part_user) {
+      $three_part_count = $three_part_user->users_count;
+    }
 
       $html[] = '<div class="text-left">';
 
-
-    
       if($one_part){
           // 部数の右に予約している人数を表示する
           //   ２つの値をポスト送信する
           // ログインユーザのid 予約日 予約パート
         $html[] = '<p class="day_part m-0 pt-1">1部
-        <a href="/calendar/{id}/'.$ymd.'/1">'.$one_part_count.'</a></p>';
+        <a href="/calendar/{id}/'.$ymd.'/1">'. $one_part_count.'</a></p>';
       }
       if($two_part){
         $html[] = '<p class="day_part m-0 pt-1">2部
-        <a href="/calendar/{id}/'.$ymd.'/1">'.$two_part_frame.'</a></p>';
+        <a href="/calendar/{id}/'.$ymd.'/1">'.$two_part_count.'</a></p>';
       }
       if($three_part){
         $html[] = '<p class="day_part m-0 pt-1">3部
-        <a href="/calendar/{id}/'.$ymd.'/1">'.$three_part_frame.'</a></p>';
+        <a href="/calendar/{id}/'.$ymd.'/1">'.$three_part_count.'</a></p>';
       }
       $html[] = '</div>';
 
