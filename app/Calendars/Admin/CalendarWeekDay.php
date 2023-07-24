@@ -83,11 +83,11 @@ class CalendarWeekDay{
       }
       if($two_part){
         $html[] = '<p class="day_part m-0 pt-1">2部
-        <a href="/calendar/{id}/'.$ymd.'/1">'.$two_part_count.'</a></p>';
+        <a href="/calendar/{id}/'.$ymd.'/2">'.$two_part_count.'</a></p>';
       }
       if($three_part){
         $html[] = '<p class="day_part m-0 pt-1">3部
-        <a href="/calendar/{id}/'.$ymd.'/1">'.$three_part_count.'</a></p>';
+        <a href="/calendar/{id}/'.$ymd.'/3">'.$three_part_count.'</a></p>';
       }
       $html[] = '</div>';
 
