@@ -194,7 +194,8 @@ li{
   border-radius:5px;
   padding:0 5px;
   border:none;
-  background:#999;
+  /* background:#999; */
+  background-color:#03AAD2;
   color:#FFF;
 }
 .main_categories span,
@@ -236,4 +237,65 @@ li{
 }
 .subject_inner{
   display:none;
+}
+
+/* ログイン画面 */
+.pt-4{
+  background-color: #FFF;
+  border-radius: 10px;
+  box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.4);
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+}
+
+img{
+  padding: 50px 0px 50px 0px;
+  width: 150px;
+  height: auto;
+}
+
+.pt-6{
+  padding-bottom: 20px;
+}
+
+.bold a{
+  color:inherit;
+  /* colorプロパティに指定している「inherit」は、親要素のCSSを継承する役割があります。 */
+  text-decoration: none;
+  font-weight:bold;
+}
+
+.mr-5 i{
+color: #9E9E9E;
+}
+.mr-5 span{
+color: #9E9E9E;
+}
+.mr-6 span{
+color: #9E9E9E;
+}
+.like_btn{
+color: #9E9E9E;
+}
+
+.post_btn{
+  border-radius:5px;
+  padding:0 5px;
+  border:none;
+  background-color:#03AAD2;
+}
+.post_btn a {
+  font-size:14px;
+  color:#FFF;
+}
+.post_btn {
+  font-size:14px;
+  color:#FFF;
+}
+
+
+.pink{
+  background-color:#ee95c4;
+}
+.yellow{
+  background-color:#facc4e;
 }
