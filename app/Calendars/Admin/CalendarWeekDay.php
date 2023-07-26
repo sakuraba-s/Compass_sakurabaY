@@ -79,15 +79,15 @@ class CalendarWeekDay{
           //   ２つの値をポスト送信する
           // ログインユーザのid 予約日 予約パート
         $html[] = '<p class="day_part m-0 pt-1">1部
-        <a href="/calendar/{id}/'.$ymd.'/1">'. $one_part_count.'</a></p>';
+        <a href="/calendar/'.$ymd.'/1">'. $one_part_count.'</a></p>';
       }
       if($two_part){
         $html[] = '<p class="day_part m-0 pt-1">2部
-        <a href="/calendar/{id}/'.$ymd.'/2">'.$two_part_count.'</a></p>';
+        <a href="/calendar/'.$ymd.'/2">'.$two_part_count.'</a></p>';
       }
       if($three_part){
         $html[] = '<p class="day_part m-0 pt-1">3部
-        <a href="/calendar/{id}/'.$ymd.'/3">'.$three_part_count.'</a></p>';
+        <a href="/calendar/'.$ymd.'/3">'.$three_part_count.'</a></p>';
       }
       $html[] = '</div>';
 

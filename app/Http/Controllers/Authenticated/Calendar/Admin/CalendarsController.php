@@ -22,7 +22,10 @@ class CalendarsController extends Controller
 
     // スクール予約詳細
     // public function reserveDetail($user_id = 0, $date=0, $part=0){
-    public function reserveDetail($user_id = 0, $date=0, $part=0){
+    public function reserveDetail($date=0, $part=0){
+        // ※ルーティングの際にカッコの中のパラメータ名をコントローラの引数に設定するよ！
+        // (数があっていなかったり、名前が違ったりするとうまくいかないので注意
+        // dateやpartに値が無い場合はゼロとして処理するよ)
         // その日そのパートを予約している人の情報を取得
         $reservePersons = ReserveSettings::with('users')->where('setting_reserve', $date)->where('setting_part', $part)->get();
         // ユーザの情報と該当日時をビューに渡す

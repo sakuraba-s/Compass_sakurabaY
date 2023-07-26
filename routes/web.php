@@ -41,7 +41,10 @@ Route::group(['middleware' => 'auth'], function(){
         //   三つの値をポスト送信する
         // ログインユーザのid 予約日 予約パート
         // urlのカッコ内がキーとなる
-                Route::get('/calendar/{id}/{data}/{part?}', 'CalendarsController@reserveDetail')->name('calendar.admin.detail');
+                Route::get('/calendar/{data}/{part?}', 'CalendarsController@reserveDetail')->name('calendar.admin.detail');
+                // ⓵※カッコの中のパラメータ名をコントローラの引数に設定する
+                //⓶リンクで描いた、calendar/'.$ymd.'/1" この後半の.$ymd.'/1がそれぞれdata、partというパラメータ名で渡される
+                // ⓷それをコントローラで$data、$partという変数として引数で使う
                 // スクール枠登録
                 Route::get('/setting/{user_id}/admin', 'CalendarsController@reserveSettings')->name('calendar.admin.setting');
                 Route::post('/setting/update/admin', 'CalendarsController@updateSettings')->name('calendar.admin.update');
