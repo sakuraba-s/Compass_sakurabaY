@@ -279,23 +279,119 @@ color: #9E9E9E;
 
 .post_btn{
   border-radius:5px;
-  padding:0 5px;
+  padding:10px 0px 10px 0px;
   border:none;
   background-color:#03AAD2;
-}
-.post_btn a {
-  font-size:14px;
-  color:#FFF;
-}
-.post_btn {
-  font-size:14px;
-  color:#FFF;
+  text-align: center;
 }
 
+.post_btn a {
+  color:#FFF;
+}
 
 .pink{
-  background-color:#ee95c4;
+  background-color:#d475a8;
+  color:#FFF;
+  border-radius:5px;
+  padding:10px;
+  border:none;
+  width: 49.5%;
+  margin-bottom: 20px;
+
 }
 .yellow{
-  background-color:#facc4e;
+  background-color:#e6b83c;
+  color:#FFF;
+  border-radius:5px;
+  padding:10px;
+  border:none;
+  width: 49.5%;
+  margin-bottom: 20px;
+}
+
+.post_btn:nth-child( 2){
+  background-color: transparent;
+}
+
+.post_btn input{
+  -moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: transparent;
+	background-image: none;
+	border: 1px solid rgba(0, 0, 0, 0.16);
+	border-radius: 5px;
+	/* color: inherit; */
+	/* font-family: inherit; */
+	/* font-size: 1em; */
+  padding:10px 0px 10px 0px;
+  text-align: center;
+	width: 100%;
+}
+
+.post_btn input:nth-child(1){
+  width: 70%;
+	border-radius: 5px 0px 0px 5px;
+}
+.post_btn input:nth-child(2){
+  width: 30%;
+  background-color:#03AAD2;
+  color:#FFF;
+	border-radius: 0px 5px 5px 0px;
+  border: none;
+}
+
+
+.other_area{
+/* display: flex; */
+}
+
+.acMenu dt{
+  display:block;
+  /* width:200px; */
+  height:50px;
+  line-height:50px;
+  border-bottom:#9E9E9E 1px solid;
+  cursor:pointer;
+  font-weight: normal;
+  font-size: 1.3rem;
+
+  }
+  .acMenu dd{
+  background:#f2f2f2;
+  height:50px;
+  line-height:50px;
+  border-bottom:#9E9E9E 1px solid;
+  display:none;
+  background-color: transparent;
+  
+  }
+
+  .acMenu dd input{
+  border: none;
+  background-color: transparent;
+  display: block;
+  }
+
+
+  .acMenu i {
+    transform: rotate(-90deg);
+    color: #1d1c1c;
+    font-weight: bolder;
+    /* フォントを少しだけ太くする */
+    background: transparent;
+    border: none;
+    margin-right: 10px;
+    margin-left: 20px;
+    /* ボタンに謎の枠線と背景色がついたので消す */
+}
+/* ハンバーガーメニューを押下すると上向きになる */
+.acMenu .active{
+    transform: rotate(90deg);
+    /* color: #ffffff; */
+    font-weight: bolder;
+    background: transparent;
+    border: none;
+    margin-right: 10px;
+    margin-left: 20px;
 }

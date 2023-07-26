@@ -75,4 +75,10 @@ $(function () {
     return false;
   });
 
+  // カテゴリのアコーディオンメニュ
+  $(".acMenu dt").on("click", function() {
+    $(this).next().slideToggle();
+    $('.acMenu dt').removeClass('active');
+    });
+
 });

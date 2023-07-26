@@ -44,24 +44,28 @@
   <div class="other_area border w-25">
     <div class="border m-4">
       <div class="post_btn"><a href="{{ route('post.input') }}">投稿</a></div>
-      <div class="">
+      <div class="post_btn d-flex justify-content-between">
         <input type="text" placeholder="キーワードを検索" name="keyword" form="postSearchRequest">
         <input type="submit" value="検索" form="postSearchRequest">
       </div>
-      <input type="submit" name="like_posts" class="post_btn pink" value="いいねした投稿" form="postSearchRequest">
-      <input type="submit" name="my_posts" class="post_btn yellow" value="自分の投稿" form="postSearchRequest">
+      <div class="d-flex justify-content-between">
+        <input type="submit" name="like_posts" class="pink" value="いいねした投稿" form="postSearchRequest">
+        <input type="submit" name="my_posts" class="yellow" value="自分の投稿" form="postSearchRequest">
+      </div>
       <ul>
+      <span>カテゴリ検索<span>
+
         @foreach($categories as $category)
-        <li class="main_categories" category_id="{{ $category->id }}">
+        <li class="main_categories acMenu" category_id="{{ $category->id }}">
+          <dt>{{ $category->main_category }}<i></i></dt>
           <!-- メインカテゴリ -->
-          <span>{{ $category->main_category }}<span>
-          <!-- サブカテゴリ -->
-          <span>
+          <dd>
             @foreach($category->subCategories as $subcategory)
               <!-- ここのnameで判別して送る -->
-              <input type="submit" name="category_word" class="category_btn" value=" {{ $subcategory->sub_category }}" form="postSearchRequest">
+              <input type="submit" name="category_word" class="" value=" {{ $subcategory->sub_category }}" form="postSearchRequest">
             @endforeach
-          </span>
+          </dd>
+          <!-- サブカテゴリ -->
         </li>
         @endforeach
       </ul>
