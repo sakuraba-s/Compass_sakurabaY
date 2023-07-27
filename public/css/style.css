@@ -135,7 +135,13 @@ li{
   font-size:12px;
   color:#999;
   font-weight:bold;
+  text-align: left;
+
 }
+.contributor p{
+  margin: 0px 0px 10px 0px;
+}
+
 .detsail_post_title{
   font-size:14px;
 }
@@ -341,36 +347,40 @@ color: #9E9E9E;
   border: none;
 }
 
-
-.other_area{
-/* display: flex; */
+.other_area a{
+  display: block;
+}
+.other_area a:hover{
+  text-decoration: none;
 }
 
 .acMenu dt{
-  display:block;
-  /* width:200px; */
-  height:50px;
-  line-height:50px;
+  position: relative;
   border-bottom:#9E9E9E 1px solid;
   cursor:pointer;
   font-weight: normal;
-  font-size: 1.3rem;
-
+  padding: 12px 0px;
   }
+
+/* サブカテゴリ */
   .acMenu dd{
   background:#f2f2f2;
-  height:50px;
   line-height:50px;
-  border-bottom:#9E9E9E 1px solid;
   display:none;
+  /* 初めは表示しない */
   background-color: transparent;
-  
+  position: relative;
   }
 
+/* サブカテゴリ中身 */
   .acMenu dd input{
+  margin-left: 20px;
   border: none;
+  /* デフォルトの外枠を外す */
   background-color: transparent;
-  display: block;
+  border-bottom:#9E9E9E 1px solid;
+  width: 80%;
+  text-align: left;
   }
 
 
@@ -386,12 +396,72 @@ color: #9E9E9E;
     /* ボタンに謎の枠線と背景色がついたので消す */
 }
 /* ハンバーガーメニューを押下すると上向きになる */
-.acMenu .active{
-    transform: rotate(90deg);
-    /* color: #ffffff; */
-    font-weight: bolder;
-    background: transparent;
-    border: none;
-    margin-right: 10px;
-    margin-left: 20px;
+
+/*閉じた状態の矢印描画*/
+.acMenu dt:after{
+  border-right: solid 2px #000000;
+  border-top: solid 2px #000000;
+  content: "";
+  display: block;
+  height: 8px;
+  position: absolute;
+  right: 25px;
+  top: 38%;
+  transform: rotate(135deg);
+  transition: transform .3s ease-in-out, top .3s ease-in-out;
+  width: 8px;
 }
+
+.acMenu dt.open:after{
+  top: 45%;
+  transform: rotate(-45deg);
+}
+
+
+/* 新規投稿ページ */
+.post_create_area .box{
+	border: 1px solid rgba(0, 0, 0, 0.16);
+  padding:10px 0px 10px 0px;
+	width: 100%;
+  height: 45px;
+}
+.post_create_area textarea{
+	border: 1px solid rgba(0, 0, 0, 0.16);
+  padding:10px 0px 10px 0px;
+	width: 100%;
+  height: 300px;
+}
+.category_area .box{
+	border: 1px solid rgba(0, 0, 0, 0.16);
+  padding:10px 0px 10px 0px;
+	width: 100%;
+  height: 45px;
+  margin: 5px 0px 5px 0px;
+}
+.comment_area .box{
+	border: 1px solid rgba(0, 0, 0, 0.16);
+  padding:10px 0px 10px 0px;
+	width: 100%;
+  height: 300px;
+  margin: 5px 0px 5px 0px;
+}
+.comment_area .btn{
+  display: block;
+  margin: 0 0 0 auto;
+}
+
+/* 投稿詳細ページ */
+.detail_container.btn.red{
+  border: none;
+  background-color:#E2254D;
+}
+
+.modal.box{
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  padding:10px 0px 10px 0px;
+	width: 100%;
+  height: 300px;
+  margin: 5px 0px 5px 0px;
+
+}
+

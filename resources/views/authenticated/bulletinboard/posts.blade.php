@@ -53,11 +53,11 @@
         <input type="submit" name="my_posts" class="yellow" value="自分の投稿" form="postSearchRequest">
       </div>
       <ul>
-      <span>カテゴリ検索<span>
+      <h5>カテゴリ検索</h5>
 
         @foreach($categories as $category)
         <li class="main_categories acMenu" category_id="{{ $category->id }}">
-          <dt>{{ $category->main_category }}<i></i></dt>
+          <dt><h5>{{ $category->main_category }}</h5></dt>
           <!-- メインカテゴリ -->
           <dd>
             @foreach($category->subCategories as $subcategory)

@@ -77,8 +77,12 @@ $(function () {
 
   // カテゴリのアコーディオンメニュ
   $(".acMenu dt").on("click", function() {
-    $(this).next().slideToggle();
-    $('.acMenu dt').removeClass('active');
+    $(this).next().slideToggle(300);
+    // next次に配置されている要素を取得
+    // コンテンツの表示非表示※display:noneがblockに変化する
+    // カッコ内はアニメーションの時間0.3秒
+    $(this).toggleClass("open", 300);
+    // メインカテゴリにopenクラスを付け外しして矢印の向きを変更
     });
 
 });
