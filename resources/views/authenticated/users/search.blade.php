@@ -66,12 +66,12 @@
   <div class="search_area w-25 border">
     <div class="">
       <div>
-        <input type="text" class="free_word" name="keyword" placeholder="キーワードを検索" form="userSearchRequest">
+        <input type="text" class="free_word post_btn btn" name="keyword" placeholder="キーワードを検索" form="userSearchRequest">
       </div>
       <div>
         <lavel>カテゴリ</lavel>
         <select form="userSearchRequest" name="category">
-          <option value="name">名前</option>
+          <option value="name" class="post_btn btn">名前</option>
           <option value="id">社員ID</option>
         </select>
       </div>
