@@ -451,7 +451,7 @@ color: #9E9E9E;
 }
 
 /* 投稿詳細ページ */
-.detail_container.btn.red{
+.btn .red{
   border: none;
   background-color:#E2254D;
 }
