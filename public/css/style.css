@@ -609,3 +609,21 @@ color: #9E9E9E;
   margin:20px 0px 10px 0px;
 }
 
+/* 予約詳細 */
+tr.data :nth-child(even){
+  background: #add8e6;
+}
+tr.data :nth-child(odd){
+  background: #ffffff;
+}
+
+/* /* */
+
+.data1 :nth-child(even){
+  background: #d8f5ff;
+
+}
+.data :nth-child(odd){
+  background: #ffffff;
+
+}
