@@ -1,9 +1,17 @@
 $(function () {
   $('.search_conditions').click(function () {
-    $('.search_conditions_inner').slideToggle();
+    $(this).next().slideToggle(300);
+
+    // $('.search_conditions_inner').slideToggle(300);
+    $(this).toggleClass("open", 300);
+  
+
   });
 
   $('.subject_edit_btn').click(function () {
-    $('.subject_inner').slideToggle();
+    // $('.subject_inner').slideToggle(300);
+    $(this).next().slideToggle(300);
+    $(this).toggleClass("open", 300);
+
   });
 });
