@@ -37,6 +37,7 @@ li{
 .day-blank{
   background:#D3D3D3;
 }
+/* 土日の色を変える */
 .day-sat{
   color:#0000FF;
 }
@@ -610,20 +611,46 @@ color: #9E9E9E;
 }
 
 /* 予約詳細 */
-tr.data :nth-child(even){
-  background: #add8e6;
+.reserve_list{
+  background-color: #ffffff;
 }
-tr.data :nth-child(odd){
+
+.reserve_list{
+  width: 100%;
+}
+.reserve_list td{
+  padding: 10px 0px 10px 0px;
+}
+.reserve_list th{
+  padding: 10px 0px 10px 0px;
+}
+tr.data:nth-child(odd){
+  background: #d4ecf5;
+}
+tr.data:nth-child(even){
   background: #ffffff;
 }
-
-/* /* */
-
-.data1 :nth-child(even){
-  background: #d8f5ff;
-
+.column{
+	background-color:#03AAD2;
+  color: #ffffff;
 }
-.data :nth-child(odd){
-  background: #ffffff;
 
+
+
+/* 白い外枠 */
+.bg-white{
+  padding:5px;
+  border-radius:10px;
 }
+
+/* 土日に色を付ける */
+.calendar-td:nth-of-type(6){
+  color: #4214c2;
+}
+.calendar-td:nth-of-type(7){
+  color: #c21414;
+}
+.calendar-td p:nth-of-type(2){
+  color: #000000;
+}
+

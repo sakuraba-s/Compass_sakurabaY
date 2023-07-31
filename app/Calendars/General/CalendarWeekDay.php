@@ -26,6 +26,15 @@ class CalendarWeekDay{
 
    function render(){
      return '<p class="day">' . $this->carbon->format("j"). '日</p>';
+
+
+        // 土日に色を付ける
+        // if($this->carbon->format("j")=='1'){
+        //   return '<p class="day day-sat">' . $this->carbon->format("j"). '日</p>';
+        // }else{
+        //   return '<p class="day">' . $this->carbon->format("j"). '日</p>';
+        // };
+
    }
 
    function selectPart($ymd){

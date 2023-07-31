@@ -41,12 +41,11 @@ class CalendarView{
     $html[] = '<tbody>';
     // 週カレンダーオブジェクトの配列を取得
     // getweeksは下に記載のメソッド
-    // 1から月末までの取得
+    // 1から月末までの日付を取得
     $weeks = $this->getWeeks();
 
     foreach($weeks as $week){
       $html[] = '<tr class="'.$week->getClassName().'">';
-
 
       $days = $week->getDays();
       // getDaysは変数weekの中でニューしているCalendarWeekの中にあるメソッド
@@ -58,7 +57,6 @@ class CalendarView{
         // 今日
         $toDay = $this->carbon->copy()->format("Y-m-d");
 
-
         // 過去日をグレーにする
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
           $html[] = '<td class="past-day calendar-td">';
@@ -67,6 +65,7 @@ class CalendarView{
         }
         $html[] = $day->render();
 
+        // 状態で表示する文言を変える
         // 配列の中に指定した値が存在するかチェックする関数
         // ※※分岐⓵予約しているかどうか※※
         if(in_array($day->everyDay(), $day->authReserveDay())){
