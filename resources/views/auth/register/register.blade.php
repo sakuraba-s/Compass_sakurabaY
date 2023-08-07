@@ -13,11 +13,11 @@
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
 </head>
-<body>
+<body class="all_content">
   <form action="{{ route('registerPost') }}" method="POST">
     <div class="w-100 vh-100 d-flex" style="align-items:center; justify-content:center;">
-      <div class="w-25 vh-75 border p-3">
-        <div class="register_form">
+      <div class="w-25 vh-75 border p-3  shadow">
+        <div class="register_form ">
 
           @if($errors->first('over_name'))
           <span class="error_message">{{ $errors->first('over_name') }}</span>
@@ -232,7 +232,7 @@
         </div>
 
         <div class="text-center">
-          <a href="{{ route('loginView') }}">ログイン</a>
+          <a href="{{ route('loginView') }}">ログインはこちら</a>
         </div>
       </div>
       {{ csrf_field() }}

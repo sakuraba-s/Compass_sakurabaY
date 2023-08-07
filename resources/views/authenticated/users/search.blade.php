@@ -2,8 +2,8 @@
 
 @section('content')
 <!-- <p>ユーザー検索</p> -->
-<div class="search_content w-100 border d-flex">
-  <div class="reserve_users_area">
+<div class="search_content w-100 vh-100 border d-flex">
+  <div class="reserve_users_area ">
     <!-- コントローラから来たユーザ情報を繰り返しに入れる -->
 
     @foreach($users as $user)

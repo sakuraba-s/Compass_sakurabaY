@@ -22,7 +22,7 @@
 
 <body class="all_content">
   <div class="d-flex">
-    <div class="sidebar">
+    <div class="sidebar vh-100%">
       @section('sidebar')
       <p><a href="{{ route('top.show') }}"><i class="fa-solid fa-house"></i>マイページ</a></p>
       <p><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>ログアウト</a></p>
