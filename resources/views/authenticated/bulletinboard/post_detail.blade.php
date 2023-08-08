@@ -82,23 +82,32 @@
 <div class="modal js-modal">
   <div class="modal__bg js-modal-close"></div>
   <div class="modal__content">
+    <!-- <form action="{{ route('post.edit') }}" method="post"> -->
     <form action="{{ route('post.edit') }}" method="post">
-      <div class="w-100">
-        <div class="modal-inner-title w-50 m-auto box">
-          <input type="text" name="post_title box" placeholder="タイトル" class="w-100">
+        <div class="w-100">
+
+          <!-- jQueryでモーダルへ受け渡した値を当てはまる 目印は name -->
+          <!-- タイトル -->
+          <div class="modal-inner-title w-50 m-auto box">
+            <input type="text" name="post_title box" placeholder="タイトル" class="w-100">
+          </div>
+
+          <!-- 本文 -->
+          <div class="modal-inner-body w-50 m-auto pt-3 pb-3 box">
+            <textarea placeholder="投稿内容" name="post_body box" class="w-100"></textarea>
+          </div>
+
+          <!-- 更新する投稿のidをhiddenで送信 -->
+          <div class="w-50 m-auto edit-modal-btn d-flex">
+            <a class="js-modal-close btn btn-danger d-inline-block" href="">閉じる</a>
+            <input type="hidden" class="edit-modal-hidden" name="post_id" value="">
+            <!-- value部分にjQueryでモーダルへ受け渡した値を当てはめる -->
+            <!-- <input type="hidden" class="edit-modal-hidden" name="post_title" value="">
+            <input type="hidden" class="edit-modal-hidden" name="post_body" value=""> -->
+            <input type="submit" class="btn btn-primary d-block" value="編集">
+          </div>
         </div>
-        <div class="modal-inner-body w-50 m-auto pt-3 pb-3 box">
-          <textarea placeholder="投稿内容" name="post_body box" class="w-100"></textarea>
-        </div>
-        <div class="w-50 m-auto edit-modal-btn d-flex">
-          <a class="js-modal-close btn btn-danger d-inline-block" href="">閉じる</a>
-          <input type="hidden" class="edit-modal-hidden" name="post_id" value="">
-          <!-- <input type="hidden" class="edit-modal-hidden" name="post_title" value="">
-          <input type="hidden" class="edit-modal-hidden" name="post_body" value=""> -->
-          <input type="submit" class="btn btn-primary d-block" value="編集">
-        </div>
-      </div>
-      {{ csrf_field() }}
+          {{ csrf_field() }}
     </form>
   </div>
 </div>

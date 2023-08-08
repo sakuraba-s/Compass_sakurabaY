@@ -97,7 +97,7 @@ class PostsController extends Controller
 
     // 投稿編集
     // バリデーションをかませる
-    public function postEdit(EditFormRequest $request){
+    public function postEdit(Request $request){
         Post::where('id', $request->post_id)->update([
             'post_title' => $request->post_title,
             'post' => $request->post_body,
