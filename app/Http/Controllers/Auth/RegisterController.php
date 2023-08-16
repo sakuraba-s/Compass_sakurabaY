@@ -96,7 +96,7 @@ class RegisterController extends Controller
                 // commitメソッドでデータベースに反映
                 // トランザクション
                 DB::commit();
-                return view('auth.login.login');
+                return view('loginView');
             }catch(\Exception $e){
                 // これまでのデータベースの変更をトランザクションの開始時まで戻す
                 // トランザクション
