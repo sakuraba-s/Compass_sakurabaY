@@ -22,17 +22,17 @@
 
 <body class="all_content">
   <div class="d-flex">
-    <div class="sidebar vh-100%">
+    <div class="sidebar">
       @section('sidebar')
       <p><a href="{{ route('top.show') }}"><i class="fa-solid fa-house"></i>マイページ</a></p>
       <p><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>ログアウト</a></p>
       <p><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}"><i class="fa-regular fa-calendar"></i>スクール予約</a></p>
 
       <!-- 権限に「教師」が含まれるユーザにだけ表示 -->
-    @can('admin')
-      <p><a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}"><i class="fa-solid fa-calendar"></i>スクール予約確認</a></p>
-      <p><a href="{{ route('calendar.admin.setting',['user_id' => Auth::id()]) }}"><i class="fa-regular fa-calendar-plus"></i>スクール枠登録</a></p>
-    @endcan
+      @can('admin')
+        <p><a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}"><i class="fa-solid fa-calendar"></i>スクール予約確認</a></p>
+        <p><a href="{{ route('calendar.admin.setting',['user_id' => Auth::id()]) }}"><i class="fa-regular fa-calendar-plus"></i>スクール枠登録</a></p>
+      @endcan
 
       <p><a href="{{ route('post.show') }}"><i class="fa-regular fa-comment"></i>掲示板</a></p>
       <p><a href="{{ route('user.show') }}"><i class="fa-solid fa-users"></i>ユーザー検索</a></p>
