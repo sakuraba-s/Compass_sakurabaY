@@ -51,11 +51,11 @@
             @foreach($user->subjects as $subject)
               <div class="d-flex">
                 @if($subject->id == "1")
-                <span>国語</span>
+                <span class="mr-2">国語</span>
                 @elseif($subject->id == "2")
-                <span>数学</span>
+                <span class="mr-2">数学</span>
                 @elseif($subject->id == "3")
-                <span>英語</span>
+                <span class="mr-2">英語</span>
                 @endif
               </div>
             @endforeach
